@@ -98,6 +98,11 @@ a {
   animation: pulse 2s ease-in-out infinite;
 }
 
+/* Real quotes, just not fresh — muted rather than alarming. */
+.ticker-status.is-cached {
+  color: var(--muted-2);
+}
+
 .ticker-status.is-sample {
   color: #c9a227;
 }

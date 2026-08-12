@@ -1,9 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SAMPLE_FEED, type QuoteFeed } from "@/lib/quotes";
+import { SAMPLE_FEED, type FeedState, type QuoteFeed } from "@/lib/quotes";
 
 const POLL_MS = 60_000;
+
+const STATUS: Record<FeedState, { label: string; title: string }> = {
+  live: { label: "LIVE", title: "Live quotes, refreshed every 90s" },
+  cached: {
+    label: "CACHED",
+    title: "Showing the last good quotes while the feed catches up",
+  },
+  sample: {
+    label: "SAMPLE",
+    title: "Sample data — no market data credentials configured",
+  },
+};
 
 function formatPrice(price: number): string {
   return price.toLocaleString("en-US", {
@@ -41,6 +53,8 @@ export default function Ticker() {
     };
   }, []);
 
+  const status = STATUS[feed.state] ?? STATUS.sample;
+
   // The track holds two copies of the list so the CSS translate can loop
   // seamlessly at -50%.
   const run = [...feed.quotes, ...feed.quotes];
@@ -48,15 +62,11 @@ export default function Ticker() {
   return (
     <div className="ticker">
       <div
-        className={`ticker-status ${feed.live ? "is-live" : "is-sample"}`}
-        title={
-          feed.live
-            ? "Live quotes, refreshed every 60s"
-            : "Sample data — set FINNHUB_API_KEY to go live"
-        }
+        className={`ticker-status is-${feed.state}`}
+        title={status.title}
       >
         <span className="dot" aria-hidden="true" />
-        {feed.live ? "LIVE" : "SAMPLE"}
+        {status.label}
       </div>
 
       <div className="ticker-viewport">
