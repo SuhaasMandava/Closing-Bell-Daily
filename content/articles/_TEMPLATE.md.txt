@@ -1,0 +1,37 @@
+Copy the block below into a new file named YYYY-MM-DD.mdx in this folder.
+(This file ends in .md.txt on purpose so the site ignores it.)
+
+Only `title` and `date` are required. Everything else is optional and just
+turns on more of the design: `tags` fills the log column, `verdict` +
+`direction` draw the colored badge, `sparkline` draws the featured card chart,
+and `indexes` draws the stat cards at the top of the article.
+
+---
+title: "Headline goes here"
+date: "YYYY-MM-DD"
+summary: "One or two sentences — this is the homepage teaser."
+tags: [Rates, Earnings]
+verdict: "short call for the badge"
+direction: up        # up | down | flat
+sparkline: [5412, 5430, 5447, 5462, 5490]
+indexes:
+  - { symbol: "S&P 500", close: "5,489.90", change: "1.44%" }
+  - { symbol: "Nasdaq", close: "18,201.05", change: "1.79%" }
+  - { symbol: "US 10Y", close: "3.98%", change: "-0.07" }
+---
+
+Opening paragraph.
+
+## What moved
+
+| Sector | Change | Note |
+| --- | --- | --- |
+| Energy | +0.7% | Only sector green |
+
+## The number behind it
+
+The data point that explains the move.
+
+## What to watch
+
+Closing thought.
