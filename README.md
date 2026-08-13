@@ -223,3 +223,28 @@ lib/
 Colors, spacing, and fonts are CSS variables at the top of
 [`app/globals.css`](app/globals.css) — `--up` and `--down` drive every green and
 red on the site.
+
+## Light and dark
+
+The site follows the visitor's OS setting by default, and the toggle in the nav
+overrides it. The choice persists in `localStorage` and an inline script in
+[`app/layout.tsx`](app/layout.tsx) applies it before first paint, so there's no
+flash of the wrong theme.
+
+Every colour is a token, defined three times in
+[`app/globals.css`](app/globals.css):
+
+- `:root` — the light palette, and the base everything inherits from
+- `@media (prefers-color-scheme: dark)` scoped to `:root:not([data-theme="light"])`
+  — dark for anyone who hasn't chosen, without overriding someone who picked light
+  on a dark-mode OS
+- `:root[data-theme="dark"]` — dark when explicitly chosen
+
+The greens and reds differ per theme on purpose: the dark-mode mint (`#4ade80`)
+falls to roughly 1.5:1 contrast on white, so light mode uses darker variants
+(`#0a7d3c` / `#c0392b`) that stay legible.
+
+Which toggle icon shows is decided in CSS from the root attribute rather than
+React state, so the button is correct during the pre-hydration paint and can't
+cause a hydration mismatch. To restyle a theme, edit the tokens — no component
+changes needed.

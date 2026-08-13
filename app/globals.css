@@ -1,18 +1,100 @@
+/*
+ * Theme tokens.
+ *
+ * Light is the base palette on bare :root. Dark is redefined twice — once
+ * under prefers-color-scheme for people who never touch the toggle, and once
+ * under [data-theme="dark"] so an explicit choice wins in both directions.
+ * The :not([data-theme="light"]) guard stops the media query from overriding
+ * someone who deliberately picked light on a dark-mode OS.
+ */
 :root {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --panel: #fafaf9;
+  --panel-2: #f2f2f0;
+  --rule: #e3e3e0;
+  --rule-soft: #ededea;
+  --rule-strong: #c9c9c4;
+  --fg: #14161a;
+  --body-fg: #33383f;
+  --muted: #6f757e;
+  --muted-2: #4d535b;
+  --ticker-bg: #f7f7f5;
+
+  /* Greens and reds are darkened for light backgrounds — the dark-mode mint
+     and coral drop to roughly 1.5:1 on white. */
+  --up: #0a7d3c;
+  --down: #c0392b;
+  --warn: #9a6f00;
+
+  --up-bg: rgba(10, 125, 60, 0.08);
+  --up-border: rgba(10, 125, 60, 0.2);
+  --down-bg: rgba(192, 57, 43, 0.08);
+  --down-border: rgba(192, 57, 43, 0.2);
+  --flat-bg: rgba(77, 83, 91, 0.07);
+  --flat-border: rgba(77, 83, 91, 0.16);
+
+  --max: 70rem;
+  --radius: 10px;
+  --mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #08090a;
+    --panel: #0e1013;
+    --panel-2: #121519;
+    --rule: #1e2228;
+    --rule-soft: #171a1f;
+    --rule-strong: #2b313a;
+    --fg: #e8eaec;
+    --body-fg: #d3d7db;
+    --muted: #757c85;
+    --muted-2: #9aa2ac;
+    --ticker-bg: #0b0c0e;
+
+    --up: #4ade80;
+    --down: #f2645a;
+    --warn: #c9a227;
+
+    --up-bg: rgba(74, 222, 128, 0.1);
+    --up-border: rgba(74, 222, 128, 0.22);
+    --down-bg: rgba(242, 100, 90, 0.1);
+    --down-border: rgba(242, 100, 90, 0.22);
+    --flat-bg: rgba(154, 162, 172, 0.08);
+    --flat-border: rgba(154, 162, 172, 0.18);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
   --bg: #08090a;
   --panel: #0e1013;
   --panel-2: #121519;
   --rule: #1e2228;
   --rule-soft: #171a1f;
+  --rule-strong: #2b313a;
   --fg: #e8eaec;
+  --body-fg: #d3d7db;
   --muted: #757c85;
   --muted-2: #9aa2ac;
+  --ticker-bg: #0b0c0e;
+
   --up: #4ade80;
   --down: #f2645a;
-  --max: 70rem;
-  --radius: 10px;
-  --mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
-  --sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --warn: #c9a227;
+
+  --up-bg: rgba(74, 222, 128, 0.1);
+  --up-border: rgba(74, 222, 128, 0.22);
+  --down-bg: rgba(242, 100, 90, 0.1);
+  --down-border: rgba(242, 100, 90, 0.22);
+  --flat-bg: rgba(154, 162, 172, 0.08);
+  --flat-border: rgba(154, 162, 172, 0.18);
 }
 
 * {
@@ -62,7 +144,7 @@ a {
   display: flex;
   align-items: stretch;
   gap: 0;
-  background: #0b0c0e;
+  background: var(--ticker-bg);
   border-bottom: 1px solid var(--rule);
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -104,7 +186,7 @@ a {
 }
 
 .ticker-status.is-sample {
-  color: #c9a227;
+  color: var(--warn);
 }
 
 @keyframes pulse {
@@ -203,6 +285,68 @@ a {
 .nav-meta {
   color: var(--muted);
   letter-spacing: 0.08em;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted-2);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--fg);
+  border-color: var(--rule-strong);
+}
+
+.theme-toggle svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/*
+ * The icon shows the theme you'd switch TO. Driven entirely by CSS rather
+ * than React state, so it is already correct on first paint and can never
+ * cause a hydration mismatch.
+ */
+.theme-toggle .to-light {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .to-dark {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .theme-toggle .to-light {
+    display: block;
+  }
+}
+
+:root[data-theme="dark"] .theme-toggle .to-dark {
+  display: none;
+}
+:root[data-theme="dark"] .theme-toggle .to-light {
+  display: block;
+}
+:root[data-theme="light"] .theme-toggle .to-dark {
+  display: block;
+}
+:root[data-theme="light"] .theme-toggle .to-light {
+  display: none;
 }
 
 /* ---------- Hero ---------- */
@@ -411,18 +555,18 @@ a {
 }
 
 .badge.up {
-  background: rgba(74, 222, 128, 0.1);
-  border-color: rgba(74, 222, 128, 0.22);
+  background: var(--up-bg);
+  border-color: var(--up-border);
 }
 
 .badge.down {
-  background: rgba(242, 100, 90, 0.1);
-  border-color: rgba(242, 100, 90, 0.22);
+  background: var(--down-bg);
+  border-color: var(--down-border);
 }
 
 .badge.flat {
-  background: rgba(154, 162, 172, 0.08);
-  border-color: rgba(154, 162, 172, 0.18);
+  background: var(--flat-bg);
+  border-color: var(--flat-border);
 }
 
 .btn {
@@ -439,7 +583,7 @@ a {
 
 .btn:hover {
   color: var(--fg);
-  border-color: #333a43;
+  border-color: var(--rule-strong);
 }
 
 /* ---------- Featured ---------- */
@@ -468,7 +612,7 @@ a {
 }
 
 .card:hover {
-  border-color: #2b313a;
+  border-color: var(--rule-strong);
 }
 
 .card-head {
@@ -583,7 +727,7 @@ a {
   margin-top: 2.5rem;
   font-size: 0.95rem;
   line-height: 1.75;
-  color: #d3d7db;
+  color: var(--body-fg);
 }
 
 .body > :first-child {

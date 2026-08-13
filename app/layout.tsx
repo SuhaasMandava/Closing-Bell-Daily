@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Ticker from "@/components/Ticker";
+import ThemeToggle from "@/components/ThemeToggle";
 import { getAllArticles } from "@/lib/articles";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -48,7 +49,23 @@ export default function RootLayout({
   const count = getAllArticles().length;
 
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/*
+          Applies the saved theme before first paint. Without this the page
+          renders in the system theme and then snaps to the stored one — a
+          visible flash on every navigation.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`,
+          }}
+        />
+      </head>
       <body>
         <Ticker />
 
@@ -58,8 +75,11 @@ export default function RootLayout({
               <span>Closing Bell</span>
               <span>Daily_</span>
             </Link>
-            <span className="nav-meta">
-              {count} {count === 1 ? "ISSUE" : "ISSUES"}
+            <span className="nav-right">
+              <span className="nav-meta">
+                {count} {count === 1 ? "ISSUE" : "ISSUES"}
+              </span>
+              <ThemeToggle />
             </span>
           </nav>
         </div>
