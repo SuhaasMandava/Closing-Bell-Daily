@@ -188,6 +188,10 @@ route to update. The next `npm run build` gives it its own prerendered page.
 There's a starter you can copy in `content/articles/_TEMPLATE.md.txt`. Files
 that don't end in `.md`/`.mdx` are ignored, so the template never publishes.
 
+To draft an issue with Claude instead of writing it cold, [`DAILY_PROMPT.md`](DAILY_PROMPT.md)
+has a reusable prompt that researches the session and returns a ready-to-save
+MDX file. Change the date at the top each day.
+
 ### Markdown you can use
 
 Standard Markdown plus GitHub-flavored extras — tables, strikethrough, and
