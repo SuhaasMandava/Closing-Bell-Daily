@@ -985,3 +985,69 @@ a {
     text-align: center;
   }
 }
+
+/* ---------- Print ---------- */
+
+/*
+ * Printing or exporting an issue to PDF shouldn't carry the ticker, nav, or
+ * dark background — just the article, in ink-friendly colours.
+ */
+@media print {
+  /*
+   * Every rule in this file reads colour from these tokens, so overriding
+   * them here — instead of chasing each selector — repaints the whole page
+   * for print in one place and can't drift out of sync as new components
+   * are added.
+   */
+  :root {
+    --bg: #fff !important;
+    --panel: #fff !important;
+    --panel-2: #fff !important;
+    --rule: #ccc !important;
+    --rule-soft: #ddd !important;
+    --rule-strong: #999 !important;
+    --fg: #000 !important;
+    --body-fg: #111 !important;
+    --muted: #444 !important;
+    --muted-2: #222 !important;
+    --up: #0a7d3c !important;
+    --down: #c0392b !important;
+    --up-bg: #fff !important;
+    --down-bg: #fff !important;
+    --flat-bg: #fff !important;
+    --up-border: #999 !important;
+    --down-border: #999 !important;
+    --flat-border: #999 !important;
+  }
+
+  .ticker,
+  .nav,
+  .theme-toggle,
+  .skip-link,
+  .issue-nav,
+  .site-footer,
+  .article > .btn,
+  .article-meta .btn {
+    display: none !important;
+  }
+
+  .article {
+    max-width: none;
+    padding: 0;
+  }
+
+  .body a {
+    text-decoration: underline;
+  }
+
+  .stat,
+  .body table,
+  .body pre {
+    break-inside: avoid;
+  }
+
+  .body h2,
+  .body h3 {
+    break-after: avoid;
+  }
+}
