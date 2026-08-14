@@ -7,6 +7,7 @@ import {
   formatDate,
   formatStamp,
   getArticle,
+  getArticleNeighbors,
   getArticleSlugs,
 } from "@/lib/articles";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -64,6 +65,7 @@ export default async function ArticlePage({ params }: Props) {
 
   const arrow =
     article.direction === "up" ? "▲" : article.direction === "down" ? "▼" : "—";
+  const { previous, next } = getArticleNeighbors(slug);
 
   // NewsArticle structured data — helps search engines surface the
   // headline and publish date directly in results.
@@ -136,6 +138,25 @@ export default async function ArticlePage({ params }: Props) {
         {article.tags.length > 0 && <span>{article.tags.join(" · ")}</span>}
         <span style={{ marginLeft: "auto" }}>{formatDate(article.date)}</span>
       </div>
+
+      {(previous || next) && (
+        <nav className="issue-nav" aria-label="More issues">
+          {previous ? (
+            <Link className="issue-nav-link prev" href={`/articles/${previous.slug}`}>
+              <span className="issue-nav-label">← Previous</span>
+              <span className="issue-nav-title">{previous.title}</span>
+            </Link>
+          ) : (
+            <span />
+          )}
+          {next && (
+            <Link className="issue-nav-link next" href={`/articles/${next.slug}`}>
+              <span className="issue-nav-label">Next →</span>
+              <span className="issue-nav-title">{next.title}</span>
+            </Link>
+          )}
+        </nav>
+      )}
     </article>
   );
 }

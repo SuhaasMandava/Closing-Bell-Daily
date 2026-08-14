@@ -118,6 +118,27 @@ export function getArticle(slug: string): Article | null {
   return exists ? readArticleFile(slug) : null;
 }
 
+export type ArticleNav = { slug: string; title: string } | null;
+
+/**
+ * The issue immediately before and after this one, by date — since the list
+ * is newest-first, "previous" (older) is the following array entry and "next"
+ * (newer) is the preceding one.
+ */
+export function getArticleNeighbors(slug: string): {
+  previous: ArticleNav;
+  next: ArticleNav;
+} {
+  const all = getAllArticles();
+  const i = all.findIndex((a) => a.slug === slug);
+  if (i === -1) return { previous: null, next: null };
+
+  const toNav = (a: Article | undefined): ArticleNav =>
+    a ? { slug: a.slug, title: a.title } : null;
+
+  return { previous: toNav(all[i + 1]), next: toNav(all[i - 1]) };
+}
+
 /** "August 12, 2026" — formatted in UTC so server and client always agree. */
 export function formatDate(date: string): string {
   return new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {

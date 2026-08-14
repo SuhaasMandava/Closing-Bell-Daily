@@ -869,6 +869,60 @@ a {
   border-top: 1px solid var(--rule);
 }
 
+/* ---------- Issue nav (prev/next) ---------- */
+
+.issue-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.issue-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--panel);
+  text-decoration: none;
+}
+
+.issue-nav-link:hover {
+  border-color: var(--rule-strong);
+}
+
+.issue-nav-link.next {
+  text-align: right;
+  grid-column: 2;
+}
+
+.issue-nav-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.issue-nav-title {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .issue-nav {
+    grid-template-columns: 1fr;
+  }
+  .issue-nav-link.next {
+    grid-column: 1;
+    text-align: left;
+  }
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
