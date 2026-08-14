@@ -9,6 +9,7 @@ import {
   getArticle,
   getArticleSlugs,
 } from "@/lib/articles";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -64,8 +65,31 @@ export default async function ArticlePage({ params }: Props) {
   const arrow =
     article.direction === "up" ? "▲" : article.direction === "down" ? "▼" : "—";
 
+  // NewsArticle structured data — helps search engines surface the
+  // headline and publish date directly in results.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.title,
+    description: article.summary || undefined,
+    datePublished: article.date,
+    dateModified: article.date,
+    url: `${SITE_URL}/articles/${article.slug}`,
+    publisher: { "@type": "Organization", name: SITE_NAME },
+    keywords: article.tags.length > 0 ? article.tags.join(", ") : undefined,
+  };
+
   return (
     <article className="article">
+      <script
+        type="application/ld+json"
+        // JSON.stringify escapes quotes but not "</", so guard against a
+        // stray </script> in article content breaking out of this tag.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       <p className="eyebrow">_ /Closing bell _</p>
 
       <div className="article-meta">
