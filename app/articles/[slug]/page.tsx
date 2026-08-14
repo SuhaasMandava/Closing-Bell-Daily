@@ -10,6 +10,7 @@ import {
   getArticle,
   getArticleNeighbors,
   getArticleSlugs,
+  getReadingTime,
 } from "@/lib/articles";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -97,6 +98,7 @@ export default async function ArticlePage({ params }: Props) {
 
       <div className="article-meta">
         <span>{formatStamp(article.date)}</span>
+        <span>{getReadingTime(article.content)} min read</span>
         {article.verdict && (
           <span className={`badge ${article.direction}`}>
             {arrow} {article.verdict}

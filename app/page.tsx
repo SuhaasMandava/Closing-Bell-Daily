@@ -4,6 +4,7 @@ import {
   formatCode,
   formatStamp,
   getAllArticles,
+  getReadingTime,
   type Article,
 } from "@/lib/articles";
 
@@ -128,7 +129,8 @@ export default function HomePage() {
                     <strong>
                       {(article.tags[0] ?? "WRAP").toUpperCase()}
                     </strong>{" "}
-                    · {formatStamp(article.date)}
+                    · {formatStamp(article.date)} ·{" "}
+                    {getReadingTime(article.content)} min
                   </span>
                   <Verdict article={article} />
                 </div>

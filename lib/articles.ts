@@ -139,6 +139,14 @@ export function getArticleNeighbors(slug: string): {
   return { previous: toNav(all[i + 1]), next: toNav(all[i - 1]) };
 }
 
+const WORDS_PER_MINUTE = 200;
+
+/** Rough reading time from word count, floored at 1 minute. */
+export function getReadingTime(content: string): number {
+  const words = content.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+}
+
 /** "August 12, 2026" — formatted in UTC so server and client always agree. */
 export function formatDate(date: string): string {
   return new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {
