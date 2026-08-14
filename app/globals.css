@@ -135,6 +135,32 @@ a {
   color: var(--muted-2);
 }
 
+/* ---------- Skip link ---------- */
+
+/*
+ * Off-screen until focused. Without it, keyboard and screen-reader users tab
+ * through the whole ticker before reaching the page content.
+ */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transform: translateY(-120%);
+  padding: 0.6rem 1rem;
+  background: var(--panel);
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  border-radius: 0 0 var(--radius) 0;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 /* ---------- Ticker ---------- */
 
 .ticker {

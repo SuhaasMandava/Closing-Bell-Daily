@@ -70,6 +70,10 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+
         <Ticker />
 
         <div className="container">
@@ -87,7 +91,9 @@ export default function RootLayout({
           </nav>
         </div>
 
-        <main className="container">{children}</main>
+        <main className="container" id="main">
+          {children}
+        </main>
 
         <footer className="site-footer">
           <div className="container">
