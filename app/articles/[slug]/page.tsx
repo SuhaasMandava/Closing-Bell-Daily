@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import CopyLinkButton from "@/components/CopyLinkButton";
 import {
   formatDate,
   formatStamp,
@@ -135,6 +136,7 @@ export default async function ArticlePage({ params }: Props) {
         <Link className="btn" href="/">
           ← All issues
         </Link>
+        <CopyLinkButton />
         {article.tags.length > 0 && <span>{article.tags.join(" · ")}</span>}
         <span style={{ marginLeft: "auto" }}>{formatDate(article.date)}</span>
       </div>

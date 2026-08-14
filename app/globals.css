@@ -612,6 +612,11 @@ a {
   border-color: var(--rule-strong);
 }
 
+.copy-link-btn {
+  min-width: 5.5rem;
+  cursor: pointer;
+}
+
 /* ---------- Featured ---------- */
 
 .section-label {
@@ -1027,7 +1032,8 @@ a {
   .issue-nav,
   .site-footer,
   .article > .btn,
-  .article-meta .btn {
+  .article-meta .btn,
+  .copy-link-btn {
     display: none !important;
   }
 
