@@ -319,6 +319,56 @@ a {
   gap: 0.9rem;
 }
 
+.market-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.market-status .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.market-status.is-open {
+  color: var(--up);
+  background: var(--up-bg);
+  border-color: var(--up-border);
+}
+
+.market-status.is-open .dot {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Closed reads as routine, not alarming — same muted treatment as the
+   ticker's CACHED state, since "closed" is the normal state most hours. */
+.market-status.is-closed {
+  color: var(--muted-2);
+  background: var(--flat-bg);
+  border-color: var(--flat-border);
+}
+
+@media (max-width: 640px) {
+  /* Room is tight next to the issue count and theme toggle on narrow
+     screens, so drop to just the colored dot with the label on tap/hold. */
+  .market-status .label {
+    display: none;
+  }
+  .market-status {
+    padding: 0.4rem;
+  }
+}
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;

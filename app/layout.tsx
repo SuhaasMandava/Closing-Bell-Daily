@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Ticker from "@/components/Ticker";
 import ThemeToggle from "@/components/ThemeToggle";
+import MarketStatus from "@/components/MarketStatus";
 import { getAllArticles } from "@/lib/articles";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -83,6 +84,7 @@ export default function RootLayout({
               <span>Daily_</span>
             </Link>
             <span className="nav-right">
+              <MarketStatus />
               <span className="nav-meta">
                 {count} {count === 1 ? "ISSUE" : "ISSUES"}
               </span>
