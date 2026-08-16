@@ -319,6 +319,40 @@ a {
   gap: 0.9rem;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--fg);
+  border-color: var(--rule);
+}
+
+@media (max-width: 640px) {
+  /* Keep the logo and status/toggle cluster on one row; the AI Watch
+     link drops to its own row below rather than squeezing everything. */
+  .nav {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
+  .nav-links {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
+
 .market-status {
   display: inline-flex;
   align-items: center;

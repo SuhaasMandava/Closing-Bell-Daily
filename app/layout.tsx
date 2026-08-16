@@ -83,6 +83,11 @@ export default function RootLayout({
               <span>Closing Bell</span>
               <span>Daily_</span>
             </Link>
+            <span className="nav-links">
+              <Link href="/ai-watch" className="nav-link">
+                AI Watch
+              </Link>
+            </span>
             <span className="nav-right">
               <MarketStatus />
               <span className="nav-meta">
