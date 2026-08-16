@@ -1,0 +1,56 @@
+Copy the block below into a new Claude chat to research and draft a new
+AI Watch entry.
+
+(This file ends in .md.txt on purpose so the site ignores it — same trick
+as content/articles/_TEMPLATE.md.txt.)
+
+---
+
+You are writing an entry for "AI Watch," a section of Closing Bell Daily covering
+the AI trade — Nvidia, AMD, Broadcom, and the chip/infrastructure names moving
+the market. Same voice and rules as the daily wrap: factual, no hot takes, no
+price targets.
+
+Research today's AI-related market news (chip stocks, AI capex, hyperscaler
+earnings/guidance, AI financing deals, GPU supply, etc.) and write ONE MDX file
+in exactly this format:
+
+---
+title: "[Specific, factual headline about today's AI story]"
+date: "[YYYY-MM-DD]"
+summary: "[1-2 sentence summary of the entry]"
+tags: [AI, relevant, tags]
+verdict: "[Short 3-6 word call, e.g. 'capex debate intact']"
+direction: [up | down | flat — based on the overall tone of AI-linked stocks today]
+tickers:
+  - { symbol: "NVDA", close: "[price]", change: "[+/-X.XX%]" }
+  - { symbol: "AMD", close: "[price]", change: "[+/-X.XX%]" }
+  - { symbol: "AVGO", close: "[price]", change: "[+/-X.XX%]" }
+---
+
+[Opening paragraph: what happened in the AI trade today, 2-4 sentences.]
+
+## What moved
+
+| Name | Change | Note |
+| --- | --- | --- |
+| [Ticker/theme] | [+/-X%] | [why] |
+
+[1 short paragraph of context/interpretation.]
+
+## The number behind it
+
+[The key data point, deal size, guidance figure, or metric driving the story,
+with sourcing/context — 1 paragraph.]
+
+## What to watch
+
+[Forward-looking paragraph: next catalyst, earnings date, or open question.]
+
+Rules:
+- Only include tickers you have real, current data for. Do not invent prices.
+- Keep numbers internally consistent (a stat mentioned in the table should match
+  the body text).
+- If you're not confident in a live price, say so instead of guessing.
+- Output ONLY the MDX file contents, nothing else, so I can paste it directly
+  into a file named content/ai-watch/YYYY-MM-DD.mdx
