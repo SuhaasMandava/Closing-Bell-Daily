@@ -143,6 +143,11 @@ export default async function ArticlePage({ params }: Props) {
         <span style={{ marginLeft: "auto" }}>{formatDate(article.date)}</span>
       </div>
 
+      <div className="note">
+        🤖 Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
+        coverage of the AI trade.
+      </div>
+
       {(previous || next) && (
         <nav className="issue-nav" aria-label="More issues">
           {previous ? (

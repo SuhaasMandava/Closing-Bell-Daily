@@ -37,6 +37,12 @@ export default function HomePage() {
         </p>
       </section>
 
+      <div className="note">
+        🤖 Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
+        coverage of the AI trade: Nvidia, AMD, Broadcom, and the capex and
+        financing moving those names.
+      </div>
+
       <section className="stats">
         <div className="stat">
           <div className="stat-label">ISSUES</div>

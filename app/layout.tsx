@@ -105,6 +105,7 @@ export default function RootLayout({
         <footer className="site-footer">
           <div className="container">
             <span>Closing Bell Daily · Written after every US close</span>
+            <Link href="/ai-watch">AI Watch</Link>
             <Link href="/">↑ Latest</Link>
           </div>
         </footer>
