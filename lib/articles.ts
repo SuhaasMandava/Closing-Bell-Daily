@@ -15,6 +15,8 @@ export type IndexClose = {
 export type ArticleMeta = {
   /** URL slug — the filename without its extension, e.g. "2026-08-12" */
   slug: string;
+  /** True for a "-premarket" slug, e.g. "2026-08-17-premarket" */
+  isPremarket: boolean;
   title: string;
   /** ISO date string from frontmatter, e.g. "2026-08-12" */
   date: string;
@@ -73,6 +75,7 @@ function readArticleFile(slug: string): Article {
 
   return {
     slug,
+    isPremarket: slug.endsWith("-premarket"),
     title: String(data.title),
     // A bare YAML date like 2026-08-12 is parsed into a Date by gray-matter,
     // so normalize back to a plain ISO day string.
@@ -98,7 +101,11 @@ export function getAllArticles(): Article[] {
     .readdirSync(ARTICLES_DIR)
     .filter((name) => /\.mdx?$/.test(name))
     .map((name) => readArticleFile(name.replace(/\.mdx?$/, "")))
-    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+    .sort((a, b) => {
+      if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+      // Same day: the post-market issue outranks its premarket preview.
+      return Number(a.isPremarket) - Number(b.isPremarket);
+    });
 }
 
 export function getArticleSlugs(): string[] {
@@ -167,4 +174,10 @@ export function formatStamp(date: string): string {
 export function formatCode(date: string): string {
   const [, m, d] = date.split("-");
   return `${m}/${d}`;
+}
+
+/** "08/17" or "08/17 PREMARKET" — the issue log's session label. */
+export function formatSession(article: ArticleMeta): string {
+  const code = formatCode(article.date);
+  return article.isPremarket ? `${code} PREMARKET` : code;
 }

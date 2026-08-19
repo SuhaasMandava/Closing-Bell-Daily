@@ -2,6 +2,7 @@ import Link from "next/link";
 import Sparkline from "@/components/Sparkline";
 import {
   formatCode,
+  formatSession,
   formatStamp,
   getAllArticles,
   getReadingTime,
@@ -98,7 +99,7 @@ export default function HomePage() {
               <tbody>
                 {articles.map((article) => (
                   <tr key={article.slug}>
-                    <td className="log-code">{formatCode(article.date)}</td>
+                    <td className="log-code">{formatSession(article)}</td>
                     <td>
                       <Link
                         className="log-title"
