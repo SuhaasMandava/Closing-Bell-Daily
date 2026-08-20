@@ -85,7 +85,7 @@ export default async function AiWatchEntryPage({ params }: Props) {
         }}
       />
 
-      <p className="eyebrow">_ /AI Watch _</p>
+      <p className="eyebrow">AI Watch</p>
 
       <div className="article-meta">
         <span>{formatStamp(entry.date)}</span>

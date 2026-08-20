@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <section className="hero">
-      <p className="eyebrow">_ /404 _</p>
+      <p className="eyebrow">404</p>
       <h1>No such issue</h1>
       <p>
         That session doesn&apos;t exist — the bell hasn&apos;t rung on it yet,

@@ -94,7 +94,7 @@ export default async function ArticlePage({ params }: Props) {
         }}
       />
 
-      <p className="eyebrow">_ /Closing bell _</p>
+      <p className="eyebrow">Daily Wrap</p>
 
       <div className="article-meta">
         <span>{formatStamp(article.date)}</span>
@@ -144,7 +144,7 @@ export default async function ArticlePage({ params }: Props) {
       </div>
 
       <div className="note">
-        🤖 Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
+        Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
         coverage of the AI trade.
       </div>
 

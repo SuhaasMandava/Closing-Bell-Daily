@@ -81,7 +81,7 @@ export default function RootLayout({
           <nav className="nav">
             <Link href="/" className="wordmark">
               <span>Closing Bell</span>
-              <span>Daily_</span>
+              <span>Daily</span>
             </Link>
             <span className="nav-links">
               <Link href="/ai-watch" className="nav-link">
