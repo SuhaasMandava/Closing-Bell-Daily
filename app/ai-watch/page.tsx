@@ -32,7 +32,7 @@ export default function AiWatchPage() {
   return (
     <>
       <section className="hero">
-        <p className="eyebrow">_ /AI Watch _</p>
+        <p className="eyebrow">AI Watch</p>
         <h1>The AI Trade</h1>
         <p>
           Nvidia, AMD, Broadcom and the rest of the AI infrastructure
@@ -50,7 +50,10 @@ export default function AiWatchPage() {
       ) : (
         <section className="featured">
           {entries.map((entry) => (
-            <article className="card" key={entry.slug}>
+            <article
+              className={`card card--${entry.direction}`}
+              key={entry.slug}
+            >
               <div className="card-head">
                 <span>
                   <strong>{(entry.tags[0] ?? "AI").toUpperCase()}</strong> ·{" "}

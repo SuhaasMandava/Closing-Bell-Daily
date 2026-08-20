@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <section className="hero">
-        <p className="eyebrow">_ /Daily wrap _</p>
+        <p className="eyebrow">Daily Wrap</p>
         <h1>Closing Bell</h1>
         <p>
           One issue per session, written after the US close. What moved, the
@@ -39,7 +39,7 @@ export default function HomePage() {
       </section>
 
       <div className="note">
-        🤖 Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
+        Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
         coverage of the AI trade: Nvidia, AMD, Broadcom, and the capex and
         financing moving those names.
       </div>
@@ -130,7 +130,10 @@ export default function HomePage() {
           <p className="section-label">FEATURED</p>
           <section className="featured">
             {featured.map((article) => (
-              <article className="card" key={article.slug}>
+              <article
+                className={`card card--${article.direction}`}
+                key={article.slug}
+              >
                 <div className="card-head">
                   <span>
                     <strong>
