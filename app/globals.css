@@ -131,6 +131,11 @@ a {
   color: inherit;
 }
 
+::selection {
+  background: var(--up-bg);
+  color: var(--up);
+}
+
 .container {
   max-width: var(--max);
   margin: 0 auto;
