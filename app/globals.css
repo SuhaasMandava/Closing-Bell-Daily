@@ -902,6 +902,15 @@ button:focus-visible,
   text-underline-offset: 3px;
 }
 
+.card-link span {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+
+.card-link:hover span {
+  transform: translateX(3px);
+}
+
 .note {
   margin-top: 1.75rem;
   padding: 1.1rem 1.3rem;
