@@ -6,17 +6,23 @@ import {
   formatStamp,
   getAllArticles,
   getReadingTime,
-  type Article,
+  type Direction,
 } from "@/lib/articles";
+import { getAllAiWatch } from "@/lib/ai-watch";
 
-function Verdict({ article }: { article: Article }) {
-  if (!article.verdict) return null;
-  const arrow =
-    article.direction === "up" ? "▲" : article.direction === "down" ? "▼" : "—";
+function Verdict({
+  verdict,
+  direction,
+}: {
+  verdict: string;
+  direction: Direction;
+}) {
+  if (!verdict) return null;
+  const arrow = direction === "up" ? "▲" : direction === "down" ? "▼" : "—";
 
   return (
-    <span className={`badge ${article.direction}`}>
-      {arrow} {article.verdict}
+    <span className={`badge ${direction}`}>
+      {arrow} {verdict}
     </span>
   );
 }
@@ -24,6 +30,7 @@ function Verdict({ article }: { article: Article }) {
 export default function HomePage() {
   const articles = getAllArticles();
   const featured = articles.slice(0, 2);
+  const featuredAiWatch = getAllAiWatch().slice(0, 2);
   const latest = articles[0];
 
   return (
@@ -113,7 +120,10 @@ export default function HomePage() {
                     </td>
                     <td className="log-tags">{article.tags.join(", ")}</td>
                     <td>
-                      <Verdict article={article} />
+                      <Verdict
+                        verdict={article.verdict}
+                        direction={article.direction}
+                      />
                     </td>
                     <td className="log-date">{formatStamp(article.date)}</td>
                     <td className="log-action">
@@ -142,7 +152,10 @@ export default function HomePage() {
                     · {formatStamp(article.date)} ·{" "}
                     {getReadingTime(article.content)} min
                   </span>
-                  <Verdict article={article} />
+                  <Verdict
+                    verdict={article.verdict}
+                    direction={article.direction}
+                  />
                 </div>
 
                 <Sparkline
@@ -159,6 +172,33 @@ export default function HomePage() {
 
                 <Link className="card-link" href={`/articles/${article.slug}`}>
                   Read the wrap <span>→</span>
+                </Link>
+              </article>
+            ))}
+
+            {featuredAiWatch.map((entry) => (
+              <article
+                className={`card card--${entry.direction}`}
+                key={`ai-watch-${entry.slug}`}
+              >
+                <div className="card-head">
+                  <span>
+                    <strong>AI WATCH</strong> · {formatStamp(entry.date)} ·{" "}
+                    {getReadingTime(entry.content)} min
+                  </span>
+                  <Verdict verdict={entry.verdict} direction={entry.direction} />
+                </div>
+
+                <h3>
+                  <Link href={`/ai-watch/${entry.slug}`}>{entry.title}</Link>
+                </h3>
+                {entry.summary && <p>{entry.summary}</p>}
+
+                <Link
+                  className="card-link"
+                  href={`/ai-watch/${entry.slug}`}
+                >
+                  Read the entry <span>→</span>
                 </Link>
               </article>
             ))}
