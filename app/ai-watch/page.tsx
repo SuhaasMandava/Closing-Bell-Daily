@@ -69,7 +69,7 @@ export default function AiWatchPage() {
               {entry.summary && <p>{entry.summary}</p>}
 
               <Link className="card-link" href={`/ai-watch/${entry.slug}`}>
-                Read the entry →
+                Read the entry <span>→</span>
               </Link>
             </article>
           ))}

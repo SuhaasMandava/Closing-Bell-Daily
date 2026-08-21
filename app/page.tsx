@@ -158,7 +158,7 @@ export default function HomePage() {
                 {article.summary && <p>{article.summary}</p>}
 
                 <Link className="card-link" href={`/articles/${article.slug}`}>
-                  Read the wrap →
+                  Read the wrap <span>→</span>
                 </Link>
               </article>
             ))}
