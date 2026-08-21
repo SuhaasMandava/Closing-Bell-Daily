@@ -554,6 +554,14 @@ button:focus-visible,
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
   padding: 1rem 1.1rem 0.9rem;
+  transition:
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.stat:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 .stat-label {
