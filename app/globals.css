@@ -798,7 +798,10 @@ button:focus-visible,
 
 .featured {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  /* 22rem caps this at two columns within the container's max-width, so four
+     featured cards form a clean 2x2 grid instead of orphaning a lone card
+     onto its own row. */
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1.25rem;
 }
 
