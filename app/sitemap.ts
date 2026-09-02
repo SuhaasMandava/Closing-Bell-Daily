@@ -1,23 +1,24 @@
-// AI-Watch Sitemap
-// Generated at 2026-09-02
+import type { MetadataRoute } from 'next'
 
-export const aiWatchSitemap = [
-  {
-    url: '/ai-watch/2026-09-02',
-    lastModified: '2026-09-02',
-    changeFrequency: 'weekly',
-    priority: 0.8
-  }
-];
-
-// Main Articles Sitemap
-// Generated at 2026-09-02
-
-export const mainSitemap = [
-  {
-    url: '/posts/2026-09-02',
-    lastModified: '2026-09-02',
-    changeFrequency: 'weekly',
-    priority: 0.8
-  }
-];
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    {
+      url: 'https://closing-bell-daily.com',
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1,
+    },
+    {
+      url: 'https://closing-bell-daily.com/posts/2026-09-02',
+      lastModified: new Date('2026-09-02'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://closing-bell-daily.com/ai-watch/2026-09-02',
+      lastModified: new Date('2026-09-02'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+  ]
+}
