@@ -1,3 +1,7 @@
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Blog Feed - Generated at 2026-09-02 -->
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Closing Bell Daily</title>
@@ -33,4 +37,11 @@
     <category term="Equities" />
     <category term="AI" />
   </entry>
-</feed>
+</feed>`;
+
+  return new NextResponse(xml, {
+    headers: {
+      'Content-Type': 'application/xml',
+    },
+  });
+}
