@@ -43,6 +43,7 @@ export default async function ArticleOpengraphImage({
           background: "#08090a",
           color: "#e8eaec",
           fontFamily: "monospace",
+          overflow: "hidden",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -69,13 +70,25 @@ export default async function ArticleOpengraphImage({
                 background: `${color}18`,
                 color,
                 fontSize: 26,
-                width: "fit-content",
+                width: "auto",
               }}
             >
               {arrow} {article.verdict}
             </div>
           )}
-          <div style={{ display: "flex", fontSize: 60, fontWeight: 700, lineHeight: 1.15, letterSpacing: -2 }}>
+          <div
+            style={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              fontSize: 60,
+              fontWeight: 700,
+              lineHeight: 1.15,
+              letterSpacing: -2,
+            }}
+          >
             {article?.title ?? "Closing Bell Daily"}
           </div>
         </div>
