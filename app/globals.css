@@ -654,7 +654,7 @@ button:focus-visible,
 
 .log {
   width: 100%;
-  min-width: 640px;
+  min-width: 900px;
   table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.85rem;
@@ -673,11 +673,11 @@ button:focus-visible,
 }
 
 .log col.col-call {
-  width: 11rem;
+  width: 16rem;
 }
 
 .log col.col-date {
-  width: 6rem;
+  width: 7rem;
 }
 
 .log col.col-action {
