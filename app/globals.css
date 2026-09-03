@@ -654,14 +654,14 @@ button:focus-visible,
 
 .log {
   width: 100%;
-  min-width: 900px;
+  min-width: 1020px;
   table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.85rem;
 }
 
 .log col.col-session {
-  width: 5.5rem;
+  width: 6rem;
 }
 
 .log col.col-headline {
@@ -669,19 +669,19 @@ button:focus-visible,
 }
 
 .log col.col-tags {
-  width: 12rem;
+  width: 13rem;
 }
 
 .log col.col-call {
-  width: 16rem;
+  width: 17rem;
 }
 
 .log col.col-date {
-  width: 7rem;
+  width: 7.5rem;
 }
 
 .log col.col-action {
-  width: 4.5rem;
+  width: 7.5rem;
 }
 
 .log th {
