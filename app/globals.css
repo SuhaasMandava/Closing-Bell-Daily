@@ -620,10 +620,6 @@ button:focus-visible,
   overflow: hidden;
 }
 
-.panel .table-scroll {
-  overflow-x: auto;
-}
-
 .panel-head {
   display: flex;
   align-items: center;
@@ -654,34 +650,8 @@ button:focus-visible,
 
 .log {
   width: 100%;
-  min-width: 640px;
-  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.85rem;
-}
-
-.log col.col-session {
-  width: 5.5rem;
-}
-
-.log col.col-headline {
-  width: auto;
-}
-
-.log col.col-tags {
-  width: 12rem;
-}
-
-.log col.col-call {
-  width: 11rem;
-}
-
-.log col.col-date {
-  width: 6rem;
-}
-
-.log col.col-action {
-  width: 4.5rem;
 }
 
 .log th {
@@ -728,7 +698,6 @@ button:focus-visible,
   color: var(--fg);
   text-decoration: none;
   transition: color 0.15s ease;
-  overflow-wrap: break-word;
 }
 
 .log-title:hover {
@@ -1209,11 +1178,6 @@ button:focus-visible,
 @media (max-width: 760px) {
   .log thead {
     display: none;
-  }
-
-  .log {
-    table-layout: auto;
-    min-width: 0;
   }
 
   .log,

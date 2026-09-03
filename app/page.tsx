@@ -92,16 +92,7 @@ export default function HomePage() {
               <span className="count">{articles.length} PUBLISHED</span>
             </div>
 
-            <div className="table-scroll">
             <table className="log">
-              <colgroup>
-                <col className="col-session" />
-                <col className="col-headline" />
-                <col className="col-tags" />
-                <col className="col-call" />
-                <col className="col-date" />
-                <col className="col-action" />
-              </colgroup>
               <thead>
                 <tr>
                   <th>SESSION</th>
@@ -144,7 +135,6 @@ export default function HomePage() {
                 ))}
               </tbody>
             </table>
-            </div>
           </section>
 
           <p className="section-label">FEATURED</p>
