@@ -917,6 +917,30 @@ button:focus-visible,
   color: var(--muted);
 }
 
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.section-head .section-label {
+  margin-bottom: 0;
+}
+
+.section-more {
+  margin: 3rem 0 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--up);
+  text-decoration: none;
+}
+
+.section-more:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .featured {
   display: grid;
   /* 22rem caps this at two columns within the container's max-width, so four
@@ -934,11 +958,18 @@ button:focus-visible,
   border-top: 3px solid var(--rule-strong);
   border-radius: var(--radius);
   box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-highlight);
-  padding: 1.35rem 1.4rem 1.4rem;
+  overflow: hidden;
   transition:
     transform 0.28s var(--ease-premium),
     box-shadow 0.28s var(--ease-premium),
     border-color 0.28s var(--ease-premium);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.1rem 1.4rem 1.4rem;
 }
 
 .card:hover {
@@ -967,26 +998,75 @@ button:focus-visible,
   color: var(--muted-2);
 }
 
-.sparkline {
+.chart-banner {
   display: block;
   width: 100%;
-  height: 46px;
-  margin: 1.2rem 0 0.5rem;
+  height: 116px;
+  background: var(--panel-2);
 }
 
-.sparkline path {
+.chart-banner-line {
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke: currentColor;
 }
 
-.sparkline.up path {
-  stroke: var(--up);
+.chart-banner.up {
+  color: var(--up);
 }
-.sparkline.down path {
-  stroke: var(--down);
+.chart-banner.down {
+  color: var(--down);
 }
-.sparkline.flat path {
-  stroke: var(--muted);
+.chart-banner.flat {
+  color: var(--muted);
+}
+
+.ticker-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 116px;
+  background: var(--panel-2);
+}
+
+.ticker-board-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-left: 1px solid var(--rule-soft);
+}
+
+.ticker-board-cell:first-child {
+  border-left: none;
+}
+
+.ticker-board-cell.up {
+  background: var(--up-bg);
+}
+.ticker-board-cell.down {
+  background: var(--down-bg);
+}
+
+.ticker-board-symbol {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+}
+
+.ticker-board-cell.up .ticker-board-change {
+  color: var(--up);
+}
+.ticker-board-cell.down .ticker-board-change {
+  color: var(--down);
+}
+
+.ticker-board-change {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .card h3 {

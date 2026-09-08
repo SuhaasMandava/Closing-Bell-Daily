@@ -1,5 +1,6 @@
 import Link from "next/link";
-import Sparkline from "@/components/Sparkline";
+import ChartBanner from "@/components/ChartBanner";
+import TickerBoard from "@/components/TickerBoard";
 import {
   formatCode,
   formatSession,
@@ -30,7 +31,7 @@ function Verdict({
 export default function HomePage() {
   const articles = getAllArticles();
   const featured = articles.slice(0, 2);
-  const featuredAiWatch = getAllAiWatch().slice(0, 2);
+  const featuredAiWatch = getAllAiWatch().slice(0, 3);
   const latest = articles[0];
 
   return (
@@ -154,62 +155,79 @@ export default function HomePage() {
                 className={`card card--${article.direction}`}
                 key={article.slug}
               >
-                <div className="card-head">
-                  <span>
-                    <strong>
-                      {(article.tags[0] ?? "WRAP").toUpperCase()}
-                    </strong>{" "}
-                    · {formatStamp(article.date)} ·{" "}
-                    {getReadingTime(article.content)} min
-                  </span>
-                  <Verdict
-                    verdict={article.verdict}
-                    direction={article.direction}
-                  />
-                </div>
-
-                <Sparkline
+                <ChartBanner
                   points={article.sparkline}
                   direction={article.direction}
                 />
 
-                <h3>
-                  <Link href={`/articles/${article.slug}`}>
-                    {article.title}
-                  </Link>
-                </h3>
-                {article.summary && <p>{article.summary}</p>}
+                <div className="card-body">
+                  <div className="card-head">
+                    <span>
+                      <strong>
+                        {(article.tags[0] ?? "WRAP").toUpperCase()}
+                      </strong>{" "}
+                      · {formatStamp(article.date)} ·{" "}
+                      {getReadingTime(article.content)} min
+                    </span>
+                    <Verdict
+                      verdict={article.verdict}
+                      direction={article.direction}
+                    />
+                  </div>
 
-                <Link className="card-link" href={`/articles/${article.slug}`}>
-                  Read the wrap <span>→</span>
-                </Link>
+                  <h3>
+                    <Link href={`/articles/${article.slug}`}>
+                      {article.title}
+                    </Link>
+                  </h3>
+                  {article.summary && <p>{article.summary}</p>}
+
+                  <Link
+                    className="card-link"
+                    href={`/articles/${article.slug}`}
+                  >
+                    Read the wrap <span>→</span>
+                  </Link>
+                </div>
               </article>
             ))}
+          </section>
 
+          <div className="section-head">
+            <p className="section-label">AI Watch</p>
+            <Link href="/ai-watch" className="section-more">
+              See all →
+            </Link>
+          </div>
+          <section className="featured">
             {featuredAiWatch.map((entry) => (
               <article
                 className={`card card--${entry.direction}`}
-                key={`ai-watch-${entry.slug}`}
+                key={entry.slug}
               >
-                <div className="card-head">
-                  <span>
-                    <strong>AI WATCH</strong> · {formatStamp(entry.date)} ·{" "}
-                    {getReadingTime(entry.content)} min
-                  </span>
-                  <Verdict verdict={entry.verdict} direction={entry.direction} />
+                <TickerBoard tickers={entry.tickers} />
+
+                <div className="card-body">
+                  <div className="card-head">
+                    <span>
+                      <strong>AI WATCH</strong> · {formatStamp(entry.date)} ·{" "}
+                      {getReadingTime(entry.content)} min
+                    </span>
+                    <Verdict
+                      verdict={entry.verdict}
+                      direction={entry.direction}
+                    />
+                  </div>
+
+                  <h3>
+                    <Link href={`/ai-watch/${entry.slug}`}>{entry.title}</Link>
+                  </h3>
+                  {entry.summary && <p>{entry.summary}</p>}
+
+                  <Link className="card-link" href={`/ai-watch/${entry.slug}`}>
+                    Read the entry <span>→</span>
+                  </Link>
                 </div>
-
-                <h3>
-                  <Link href={`/ai-watch/${entry.slug}`}>{entry.title}</Link>
-                </h3>
-                {entry.summary && <p>{entry.summary}</p>}
-
-                <Link
-                  className="card-link"
-                  href={`/ai-watch/${entry.slug}`}
-                >
-                  Read the entry <span>→</span>
-                </Link>
               </article>
             ))}
           </section>
