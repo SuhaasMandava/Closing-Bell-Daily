@@ -1,0 +1,6 @@
+Drop a photo named after its entry's slug in here, e.g. 2026-09-08.jpg
+(matching content/ai-watch/2026-09-08.mdx), and it becomes that entry's
+card and hero image automatically — no frontmatter edit needed. Supported
+extensions: .jpg, .jpeg, .png, .webp. To use a different filename or share
+one image across entries, set `image: "/images/ai-watch/whatever.jpg"` in
+the entry's frontmatter instead.

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import CardImage from "@/components/CardImage";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import { formatDate, formatStamp, getReadingTime } from "@/lib/articles";
 import {
@@ -99,6 +100,10 @@ export default async function AiWatchEntryPage({ params }: Props) {
 
       <h1>{entry.title}</h1>
       {entry.summary && <p className="summary">{entry.summary}</p>}
+
+      {entry.image && (
+        <CardImage src={entry.image} alt={entry.imageAlt} variant="hero" />
+      )}
 
       {entry.tickers.length > 0 && (
         <section className="stats compact">

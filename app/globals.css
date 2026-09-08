@@ -990,12 +990,30 @@ button:focus-visible,
 
 .card-head {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
   font-size: 0.76rem;
   font-weight: 500;
   color: var(--muted-2);
+}
+
+.card-image {
+  position: relative;
+  width: 100%;
+  background: var(--panel-2);
+}
+
+.card-image--banner {
+  height: 116px;
+}
+
+.card-image--hero {
+  height: 260px;
+  margin: 1.5rem 0 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .chart-banner {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CardImage from "@/components/CardImage";
 import ChartBanner from "@/components/ChartBanner";
 import TickerBoard from "@/components/TickerBoard";
 import {
@@ -155,10 +156,14 @@ export default function HomePage() {
                 className={`card card--${article.direction}`}
                 key={article.slug}
               >
-                <ChartBanner
-                  points={article.sparkline}
-                  direction={article.direction}
-                />
+                {article.image ? (
+                  <CardImage src={article.image} alt={article.imageAlt} />
+                ) : (
+                  <ChartBanner
+                    points={article.sparkline}
+                    direction={article.direction}
+                  />
+                )}
 
                 <div className="card-body">
                   <div className="card-head">
@@ -205,7 +210,11 @@ export default function HomePage() {
                 className={`card card--${entry.direction}`}
                 key={entry.slug}
               >
-                <TickerBoard tickers={entry.tickers} />
+                {entry.image ? (
+                  <CardImage src={entry.image} alt={entry.imageAlt} />
+                ) : (
+                  <TickerBoard tickers={entry.tickers} />
+                )}
 
                 <div className="card-body">
                   <div className="card-head">

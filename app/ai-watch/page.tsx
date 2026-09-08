@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CardImage from "@/components/CardImage";
+import TickerBoard from "@/components/TickerBoard";
 import { formatStamp, getReadingTime } from "@/lib/articles";
 import { getAllAiWatch } from "@/lib/ai-watch";
 
@@ -54,23 +56,34 @@ export default function AiWatchPage() {
               className={`card card--${entry.direction}`}
               key={entry.slug}
             >
-              <div className="card-head">
-                <span>
-                  <strong>{(entry.tags[0] ?? "AI").toUpperCase()}</strong> ·{" "}
-                  {formatStamp(entry.date)} · {getReadingTime(entry.content)}{" "}
-                  min
-                </span>
-                <Verdict verdict={entry.verdict} direction={entry.direction} />
+              {entry.image ? (
+                <CardImage src={entry.image} alt={entry.imageAlt} />
+              ) : (
+                <TickerBoard tickers={entry.tickers} />
+              )}
+
+              <div className="card-body">
+                <div className="card-head">
+                  <span>
+                    <strong>{(entry.tags[0] ?? "AI").toUpperCase()}</strong> ·{" "}
+                    {formatStamp(entry.date)} ·{" "}
+                    {getReadingTime(entry.content)} min
+                  </span>
+                  <Verdict
+                    verdict={entry.verdict}
+                    direction={entry.direction}
+                  />
+                </div>
+
+                <h3>
+                  <Link href={`/ai-watch/${entry.slug}`}>{entry.title}</Link>
+                </h3>
+                {entry.summary && <p>{entry.summary}</p>}
+
+                <Link className="card-link" href={`/ai-watch/${entry.slug}`}>
+                  Read the entry <span>→</span>
+                </Link>
               </div>
-
-              <h3>
-                <Link href={`/ai-watch/${entry.slug}`}>{entry.title}</Link>
-              </h3>
-              {entry.summary && <p>{entry.summary}</p>}
-
-              <Link className="card-link" href={`/ai-watch/${entry.slug}`}>
-                Read the entry <span>→</span>
-              </Link>
             </article>
           ))}
         </section>

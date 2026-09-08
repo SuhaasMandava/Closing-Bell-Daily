@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { findImage } from "@/lib/images";
 
 export const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
 
@@ -30,6 +31,14 @@ export type ArticleMeta = {
   sparkline: number[];
   /** Optional index closes rendered as stat cards on the article page */
   indexes: IndexClose[];
+  /**
+   * Card/hero photo. Explicit frontmatter wins; otherwise auto-detected from
+   * public/images/articles/<slug>.{jpg,jpeg,png,webp} so dropping a matching
+   * file in is enough — no frontmatter edit required.
+   */
+  image: string | null;
+  /** Alt text for `image`. Falls back to the title if not set. */
+  imageAlt: string;
 };
 
 export type Article = ArticleMeta & {
@@ -89,6 +98,8 @@ function readArticleFile(slug: string): Article {
     direction: toDirection(data.direction),
     sparkline: Array.isArray(data.sparkline) ? data.sparkline.map(Number) : [],
     indexes: toIndexes(data.indexes),
+    image: data.image ? String(data.image) : findImage("articles", slug),
+    imageAlt: data.imageAlt ? String(data.imageAlt) : String(data.title),
     content,
   };
 }

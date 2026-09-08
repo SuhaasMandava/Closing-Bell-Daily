@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import type { Direction, IndexClose } from "@/lib/articles";
+import { findImage } from "@/lib/images";
 
 export const AI_WATCH_DIR = path.join(process.cwd(), "content", "ai-watch");
 
@@ -19,6 +20,13 @@ export type AiWatchMeta = {
   direction: Direction;
   /** Tickers rendered as stat cards, e.g. NVDA, AMD, AVGO */
   tickers: IndexClose[];
+  /**
+   * Card/hero photo. Explicit frontmatter wins; otherwise auto-detected from
+   * public/images/ai-watch/<slug>.{jpg,jpeg,png,webp}.
+   */
+  image: string | null;
+  /** Alt text for `image`. Falls back to the title if not set. */
+  imageAlt: string;
 };
 
 export type AiWatchEntry = AiWatchMeta & {
@@ -74,6 +82,8 @@ function readEntryFile(slug: string): AiWatchEntry {
     verdict: data.verdict ? String(data.verdict) : "",
     direction: toDirection(data.direction),
     tickers: toTickers(data.tickers),
+    image: data.image ? String(data.image) : findImage("ai-watch", slug),
+    imageAlt: data.imageAlt ? String(data.imageAlt) : String(data.title),
     content,
   };
 }

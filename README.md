@@ -197,6 +197,28 @@ Full frontmatter reference for `content/articles/*.mdx`:
 | `direction` | no | `up` / `down` / `flat` — colors the badge and sparkline |
 | `sparkline` | no | Numbers drawn as the featured card's trend line |
 | `indexes` | no | Stat cards at the top of the article page, e.g. `{ symbol: "S&P 500", close: "5,489.90", change: "1.44%" }` |
+| `image` | no | Card and hero photo. Auto-detected — see below — so this is only needed for a non-standard filename |
+| `imageAlt` | no | Alt text for `image`. Falls back to `title` if not set |
+
+### Adding a photo to an issue
+
+Drop a photo named after the issue's date into
+[`public/images/articles/`](public/images/articles/) — `2026-08-13.jpg` for
+`content/articles/2026-08-13.mdx` — and it becomes that issue's card image on
+the homepage and its hero image on the article page automatically. No
+frontmatter edit needed. Supported extensions: `.jpg`, `.jpeg`, `.png`,
+`.webp`. AI Watch entries work the same way in
+[`public/images/ai-watch/`](public/images/ai-watch/).
+
+Skip a photo entirely and the card falls back to a generated visual instead —
+an area chart from `sparkline` for articles, a small ticker board from
+`tickers`/`indexes` for AI Watch — so illustrating every issue is optional,
+not required.
+
+If you're sourcing images from a web search, double-check the license before
+publishing — most image search results aren't cleared for reuse. Sites like
+[Unsplash](https://unsplash.com) and [Pexels](https://pexels.com) are a safer
+default for royalty-free photos.
 
 The build fails with a named error if `title` or `date` is missing. Keep
 `date` matching the filename — the homepage sorts on the frontmatter value,

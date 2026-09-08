@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import CardImage from "@/components/CardImage";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import {
   formatDate,
@@ -108,6 +109,10 @@ export default async function ArticlePage({ params }: Props) {
 
       <h1>{article.title}</h1>
       {article.summary && <p className="summary">{article.summary}</p>}
+
+      {article.image && (
+        <CardImage src={article.image} alt={article.imageAlt} variant="hero" />
+      )}
 
       {article.indexes.length > 0 && (
         <section className="stats compact">

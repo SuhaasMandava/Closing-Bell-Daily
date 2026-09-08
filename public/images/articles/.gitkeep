@@ -1,0 +1,6 @@
+Drop a photo named after its article's slug in here, e.g. 2026-08-13.jpg
+(matching content/articles/2026-08-13.mdx), and it becomes that issue's
+card and hero image automatically — no frontmatter edit needed. Supported
+extensions: .jpg, .jpeg, .png, .webp. To use a different filename or share
+one image across issues, set `image: "/images/articles/whatever.jpg"` in
+the article's frontmatter instead.
