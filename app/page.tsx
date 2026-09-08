@@ -114,7 +114,7 @@ export default function HomePage() {
               </thead>
               <tbody>
                 {articles.map((article) => (
-                  <tr key={article.slug}>
+                  <tr key={article.slug} data-direction={article.direction}>
                     <td className="log-code">{formatSession(article)}</td>
                     <td>
                       <Link

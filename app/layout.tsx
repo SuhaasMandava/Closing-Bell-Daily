@@ -75,28 +75,30 @@ export default function RootLayout({
           Skip to content
         </a>
 
-        <Ticker />
+        <header className="site-header">
+          <Ticker />
 
-        <div className="container">
-          <nav className="nav">
-            <Link href="/" className="wordmark">
-              <span>Closing Bell</span>
-              <span>Daily</span>
-            </Link>
-            <span className="nav-links">
-              <Link href="/ai-watch" className="nav-link">
-                AI Watch
+          <div className="container">
+            <nav className="nav">
+              <Link href="/" className="wordmark">
+                <span>Closing Bell</span>
+                <span>Daily</span>
               </Link>
-            </span>
-            <span className="nav-right">
-              <MarketStatus />
-              <span className="nav-meta">
-                {count} {count === 1 ? "ISSUE" : "ISSUES"}
+              <span className="nav-links">
+                <Link href="/ai-watch" className="nav-link">
+                  AI Watch
+                </Link>
               </span>
-              <ThemeToggle />
-            </span>
-          </nav>
-        </div>
+              <span className="nav-right">
+                <MarketStatus />
+                <span className="nav-meta">
+                  {count} {count === 1 ? "ISSUE" : "ISSUES"}
+                </span>
+                <ThemeToggle />
+              </span>
+            </nav>
+          </div>
+        </header>
 
         <main className="container" id="main">
           {children}
