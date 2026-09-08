@@ -617,8 +617,10 @@ button:focus-visible,
 
 .stats {
   display: grid;
-  /* 10rem lets the cards pair up two-across on a phone instead of stacking. */
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  /* 9rem lets the cards pair up two-across on a 375px phone instead of
+     stacking — 10rem was juuust wide enough to force a single column with
+     the container's side padding included. */
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   gap: 0.85rem;
   margin: 3rem 0 0;
 }
@@ -1325,6 +1327,27 @@ button:focus-visible,
   .site-footer .container {
     flex-direction: column;
     text-align: center;
+  }
+
+  /* A long verdict ("Good news for the economy, bad news for stocks") is
+     wider than a phone screen with white-space:nowrap — it was pushing the
+     whole page into horizontal scroll. Wrapping is the fix; the pill shape
+     still looks fine over two lines. */
+  .badge {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  /* Bumped toward the ~44px recommended minimum touch target — both sit in
+     tap-heavy spots (a "Read" link per issue row; the only way to flip
+     themes). */
+  .btn {
+    padding: 0.7rem 1.1rem;
+  }
+
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
   }
 }
 
