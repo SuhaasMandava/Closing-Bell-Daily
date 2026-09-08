@@ -1,10 +1,10 @@
 import Link from "next/link";
 import CardImage from "@/components/CardImage";
 import ChartBanner from "@/components/ChartBanner";
+import IssueLog from "@/components/IssueLog";
 import TickerBoard from "@/components/TickerBoard";
 import {
   formatCode,
-  formatSession,
   formatStamp,
   getAllArticles,
   getReadingTime,
@@ -47,108 +47,8 @@ export default function HomePage() {
         </p>
       </section>
 
-      <div className="note">
-        Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
-        coverage of the AI trade: Nvidia, AMD, Broadcom, and the capex and
-        financing moving those names.
-      </div>
-
-      <section className="stats">
-        <div className="stat">
-          <div className="stat-label">ISSUES</div>
-          <div className="stat-value">{articles.length}</div>
-          <div className="stat-note up">▲ published</div>
-        </div>
-        <div className="stat">
-          <div className="stat-label">LATEST</div>
-          <div className="stat-value">
-            {latest ? formatCode(latest.date) : "--/--"}
-          </div>
-          <div className="stat-note up">▲ most recent</div>
-        </div>
-        <div className="stat">
-          <div className="stat-label">COVERAGE</div>
-          <div className="stat-value">US</div>
-          <div className="stat-note up">— equities and rates</div>
-        </div>
-        <div className="stat">
-          <div className="stat-label">SINCE</div>
-          <div className="stat-value">
-            {articles.length
-              ? articles[articles.length - 1].date.slice(0, 4)
-              : new Date().getFullYear()}
-          </div>
-          <div className="stat-note up">▲ day one</div>
-        </div>
-      </section>
-
-      {articles.length === 0 ? (
-        <div className="note">
-          No issues yet. Drop an .mdx file in content/articles/ to publish one.
-        </div>
-      ) : (
+      {featured.length > 0 && (
         <>
-          <section className="panel">
-            <div className="panel-head">
-              <span>ISSUE LOG</span>
-              <span className="count">{articles.length} PUBLISHED</span>
-            </div>
-
-            <div className="table-scroll">
-            <table className="log">
-              <colgroup>
-                <col className="col-session" />
-                <col className="col-headline" />
-                <col className="col-tags" />
-                <col className="col-call" />
-                <col className="col-date" />
-                <col className="col-action" />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>SESSION</th>
-                  <th>HEADLINE</th>
-                  <th>TAGS</th>
-                  <th>CALL</th>
-                  <th>DATE</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {articles.map((article) => (
-                  <tr key={article.slug} data-direction={article.direction}>
-                    <td className="log-code">{formatSession(article)}</td>
-                    <td>
-                      <Link
-                        className="log-title"
-                        href={`/articles/${article.slug}`}
-                      >
-                        {article.title}
-                      </Link>
-                      {article.summary && (
-                        <p className="log-sub">{article.summary}</p>
-                      )}
-                    </td>
-                    <td className="log-tags">{article.tags.join(", ")}</td>
-                    <td>
-                      <Verdict
-                        verdict={article.verdict}
-                        direction={article.direction}
-                      />
-                    </td>
-                    <td className="log-date">{formatStamp(article.date)}</td>
-                    <td className="log-action">
-                      <Link className="btn" href={`/articles/${article.slug}`}>
-                        Read
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            </div>
-          </section>
-
           <p className="section-label">FEATURED</p>
           <section className="featured">
             {featured.map((article) => (
@@ -197,7 +97,11 @@ export default function HomePage() {
               </article>
             ))}
           </section>
+        </>
+      )}
 
+      {featuredAiWatch.length > 0 && (
+        <>
           <div className="section-head">
             <p className="section-label">AI Watch</p>
             <Link href="/ai-watch" className="section-more">
@@ -240,6 +144,51 @@ export default function HomePage() {
               </article>
             ))}
           </section>
+        </>
+      )}
+
+      <div className="note">
+        Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
+        coverage of the AI trade: Nvidia, AMD, Broadcom, and the capex and
+        financing moving those names.
+      </div>
+
+      <section className="stats">
+        <div className="stat">
+          <div className="stat-label">ISSUES</div>
+          <div className="stat-value">{articles.length}</div>
+          <div className="stat-note up">▲ published</div>
+        </div>
+        <div className="stat">
+          <div className="stat-label">LATEST</div>
+          <div className="stat-value">
+            {latest ? formatCode(latest.date) : "--/--"}
+          </div>
+          <div className="stat-note up">▲ most recent</div>
+        </div>
+        <div className="stat">
+          <div className="stat-label">COVERAGE</div>
+          <div className="stat-value">US</div>
+          <div className="stat-note up">— equities and rates</div>
+        </div>
+        <div className="stat">
+          <div className="stat-label">SINCE</div>
+          <div className="stat-value">
+            {articles.length
+              ? articles[articles.length - 1].date.slice(0, 4)
+              : new Date().getFullYear()}
+          </div>
+          <div className="stat-note up">▲ day one</div>
+        </div>
+      </section>
+
+      {articles.length === 0 ? (
+        <div className="note">
+          No issues yet. Drop an .mdx file in content/articles/ to publish one.
+        </div>
+      ) : (
+        <>
+          <IssueLog articles={articles} />
 
           <div className="note">More issues land here after every close.</div>
         </>
