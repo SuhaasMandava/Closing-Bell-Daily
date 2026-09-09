@@ -26,7 +26,7 @@ export default function CardImage({ src, alt, variant = "banner" }: Props) {
                 ? "76px"
                 : "(min-width: 768px) 40vw, 100vw"
         }
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: "cover", objectPosition: "center 30%" }}
       />
     </div>
   );
