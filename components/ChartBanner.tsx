@@ -1,6 +1,7 @@
 type Props = {
   points: number[];
   direction?: "up" | "down" | "flat";
+  size?: "banner" | "lead";
 };
 
 const WIDTH = 400;
@@ -13,7 +14,7 @@ const PAD_Y = 14;
  * sparkline data authored in frontmatter — no photo pipeline needed, and a
  * real price shape is more honest than a stock photo for a market wrap.
  */
-export default function ChartBanner({ points, direction }: Props) {
+export default function ChartBanner({ points, direction, size = "banner" }: Props) {
   if (points.length < 2) return null;
 
   const min = Math.min(...points);
@@ -40,7 +41,7 @@ export default function ChartBanner({ points, direction }: Props) {
 
   return (
     <svg
-      className={`chart-banner ${trend}`}
+      className={`chart-banner chart-banner--${size} ${trend}`}
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       preserveAspectRatio="none"
       role="presentation"

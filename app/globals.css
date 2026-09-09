@@ -977,6 +977,15 @@ button:focus-visible,
   color: var(--muted);
 }
 
+/* A plain, sentence-case heading for a major homepage section — the label
+   itself is content people read, not a muted eyebrow tag. */
+.section-title {
+  margin: 2.25rem 0 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
 .section-head {
   display: flex;
   align-items: baseline;
@@ -1036,13 +1045,11 @@ button:focus-visible,
 }
 
 .rail-head {
-  padding: 0.85rem 1.2rem;
+  padding: 0.9rem 1.2rem;
   border-bottom: 1px solid var(--rule);
-  font-size: 0.7rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+  color: var(--fg);
 }
 
 .rail-item {
@@ -1062,18 +1069,6 @@ button:focus-visible,
   background: var(--panel-2);
 }
 
-.rail-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 0.3rem;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 .rail-title {
   font-size: 0.87rem;
   font-weight: 600;
@@ -1084,75 +1079,106 @@ button:focus-visible,
   color: var(--up);
 }
 
-/* ---------- AI Watch strip: compact cards instead of full-size ones ---------- */
-
-.ai-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 0.85rem;
-}
-
-.ai-strip-item {
+.rail-meta {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.9rem 1.1rem 1rem;
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-top: 3px solid var(--rule-strong);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
-  text-decoration: none;
-  color: inherit;
-  transition:
-    transform 0.2s var(--ease-premium),
-    box-shadow 0.2s var(--ease-premium),
-    border-color 0.2s var(--ease-premium);
-}
-
-.ai-strip-item.up {
-  border-top-color: var(--up);
-}
-.ai-strip-item.down {
-  border-top-color: var(--down);
-}
-.ai-strip-item.flat {
-  border-top-color: var(--muted);
-}
-
-.ai-strip-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--rule-strong);
-}
-
-.ai-strip-meta {
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+  font-size: 0.76rem;
   color: var(--muted);
 }
 
-.ai-strip-title {
-  font-size: 0.87rem;
+/* ---------- Category columns: a thumbnail lead item plus a plain text
+   list underneath it, the way a dense news homepage packs a lot of
+   headlines into a small footprint without every row needing its own
+   photo. ---------- */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.category-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.category-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.category-head .section-more {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.category-lead {
+  display: flex;
+  gap: 0.85rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-lead-title {
+  font-size: 0.96rem;
   font-weight: 700;
   line-height: 1.35;
 }
 
-.ai-strip-item:hover .ai-strip-title {
+.category-lead:hover .category-lead-title {
   color: var(--up);
 }
 
-.ai-strip-tickers {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.15rem 0.6rem;
-  margin-top: auto;
-  padding-top: 0.4rem;
-  font-family: var(--mono);
-  font-size: 0.72rem;
+.category-item {
+  display: block;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-item:last-child {
+  border-bottom: none;
+}
+
+.category-item-title {
+  font-size: 0.85rem;
   font-weight: 600;
+  line-height: 1.4;
+}
+
+.category-item:hover .category-item-title {
+  color: var(--up);
+}
+
+.category-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.3rem;
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.category-meta .up {
+  color: var(--up);
+}
+.category-meta .down {
+  color: var(--down);
 }
 
 .card {
@@ -1213,6 +1239,20 @@ button:focus-visible,
   height: 116px;
 }
 
+/* Same crop rules as banner, just tall enough that a lone wide lead card
+   doesn't slice a photo down to a sliver. */
+.card-image--lead {
+  height: 320px;
+}
+
+.card-image--thumb {
+  width: 4.75rem;
+  height: 4.75rem;
+  flex: none;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
 .card-image--hero {
   height: 260px;
   margin: 1.5rem 0 0;
@@ -1226,6 +1266,10 @@ button:focus-visible,
   width: 100%;
   height: 116px;
   background: var(--panel-2);
+}
+
+.chart-banner--lead {
+  height: 320px;
 }
 
 .chart-banner-line {

@@ -32,7 +32,11 @@ export default function HomePage() {
   const articles = getAllArticles();
   const lead = articles[0];
   const moreHeadlines = articles.slice(1, 6);
-  const featuredAiWatch = getAllAiWatch().slice(0, 5);
+  const marketsLead = articles[6];
+  const marketsRest = articles.slice(7, 11);
+  const aiWatch = getAllAiWatch();
+  const aiWatchLead = aiWatch[0];
+  const aiWatchRest = aiWatch.slice(1, 5);
   const latest = articles[0];
 
   return (
@@ -44,13 +48,14 @@ export default function HomePage() {
 
       {lead && (
         <>
-          <p className="section-label">TOP STORIES</p>
+          <p className="section-title">Top stories</p>
           <section className="top-grid">
             <article className={`card card--${lead.direction}`}>
               {lead.image ? (
-                <CardImage src={lead.image} alt={lead.imageAlt} />
+                <CardImage variant="lead" src={lead.image} alt={lead.imageAlt} />
               ) : (
                 <ChartBanner
+                  size="lead"
                   points={lead.sparkline}
                   direction={lead.direction}
                 />
@@ -59,9 +64,9 @@ export default function HomePage() {
               <div className="card-body">
                 <div className="card-head">
                   <span>
-                    <strong>{(lead.tags[0] ?? "WRAP").toUpperCase()}</strong>{" "}
-                    · {formatStamp(lead.date)} ·{" "}
-                    {getReadingTime(lead.content)} min
+                    <strong>{lead.tags[0] ?? "Wrap"}</strong> ·{" "}
+                    {formatStamp(lead.date)} · {getReadingTime(lead.content)}{" "}
+                    min
                   </span>
                   <Verdict verdict={lead.verdict} direction={lead.direction} />
                 </div>
@@ -86,11 +91,11 @@ export default function HomePage() {
                     href={`/articles/${article.slug}`}
                     className="rail-item"
                   >
+                    <div className="rail-title">{article.title}</div>
                     <div className="rail-meta">
-                      <span>{(article.tags[0] ?? "WRAP").toUpperCase()}</span>
+                      <span>{article.tags[0] ?? "Wrap"}</span>
                       <span>· {formatStamp(article.date)}</span>
                     </div>
-                    <div className="rail-title">{article.title}</div>
                   </Link>
                 ))}
               </aside>
@@ -99,45 +104,110 @@ export default function HomePage() {
         </>
       )}
 
-      {featuredAiWatch.length > 0 && (
-        <>
-          <div className="section-head">
-            <p className="section-label">AI Watch</p>
-            <Link href="/ai-watch" className="section-more">
-              See all →
-            </Link>
-          </div>
-          <section className="ai-strip">
-            {featuredAiWatch.map((entry) => (
+      {(marketsLead || aiWatchLead) && (
+        <section className="category-grid">
+          {marketsLead && (
+            <div className="category-col">
+              <div className="category-head">
+                <span>More from the markets</span>
+              </div>
+
+              <Link href={`/articles/${marketsLead.slug}`} className="category-lead">
+                {marketsLead.image && (
+                  <CardImage
+                    variant="thumb"
+                    src={marketsLead.image}
+                    alt={marketsLead.imageAlt}
+                  />
+                )}
+                <div>
+                  <div className="category-lead-title">
+                    {marketsLead.title}
+                  </div>
+                  <div className="category-meta">
+                    <span>{marketsLead.tags[0] ?? "Wrap"}</span>
+                    <span>· {formatStamp(marketsLead.date)}</span>
+                  </div>
+                </div>
+              </Link>
+
+              {marketsRest.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/articles/${article.slug}`}
+                  className="category-item"
+                >
+                  <div className="category-item-title">{article.title}</div>
+                  <div className="category-meta">
+                    <span>{article.tags[0] ?? "Wrap"}</span>
+                    <span>· {formatStamp(article.date)}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {aiWatchLead && (
+            <div className="category-col">
+              <div className="category-head">
+                <span>AI Watch</span>
+                <Link href="/ai-watch" className="section-more">
+                  See all →
+                </Link>
+              </div>
+
               <Link
-                key={entry.slug}
-                href={`/ai-watch/${entry.slug}`}
-                className={`ai-strip-item ${entry.direction}`}
+                href={`/ai-watch/${aiWatchLead.slug}`}
+                className="category-lead"
               >
-                <span className="ai-strip-meta">
-                  {formatStamp(entry.date)} · {getReadingTime(entry.content)}{" "}
-                  min
-                </span>
-                <span className="ai-strip-title">{entry.title}</span>
-                <Verdict verdict={entry.verdict} direction={entry.direction} />
-                {entry.tickers.length > 0 && (
-                  <span className="ai-strip-tickers">
-                    {entry.tickers.slice(0, 3).map((t) => (
+                {aiWatchLead.image && (
+                  <CardImage
+                    variant="thumb"
+                    src={aiWatchLead.image}
+                    alt={aiWatchLead.imageAlt}
+                  />
+                )}
+                <div>
+                  <div className="category-lead-title">
+                    {aiWatchLead.title}
+                  </div>
+                  <div className="category-meta">
+                    {aiWatchLead.tickers.slice(0, 2).map((t) => (
                       <span
                         key={t.symbol}
-                        className={
-                          parseFloat(t.change) < 0 ? "down" : "up"
-                        }
+                        className={parseFloat(t.change) < 0 ? "down" : "up"}
                       >
                         {t.symbol} {t.change}
                       </span>
                     ))}
-                  </span>
-                )}
+                    <span>· {formatStamp(aiWatchLead.date)}</span>
+                  </div>
+                </div>
               </Link>
-            ))}
-          </section>
-        </>
+
+              {aiWatchRest.map((entry) => (
+                <Link
+                  key={entry.slug}
+                  href={`/ai-watch/${entry.slug}`}
+                  className="category-item"
+                >
+                  <div className="category-item-title">{entry.title}</div>
+                  <div className="category-meta">
+                    {entry.tickers.slice(0, 2).map((t) => (
+                      <span
+                        key={t.symbol}
+                        className={parseFloat(t.change) < 0 ? "down" : "up"}
+                      >
+                        {t.symbol} {t.change}
+                      </span>
+                    ))}
+                    <span>· {formatStamp(entry.date)}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </section>
       )}
 
       <section className="stats">
