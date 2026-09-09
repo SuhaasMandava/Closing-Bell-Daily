@@ -564,7 +564,7 @@ button:focus-visible,
 
 .hero {
   position: relative;
-  padding: 4rem 0 0;
+  padding: 2.25rem 0 0;
 }
 
 /* A faint brand-tinted glow, not a decoration — it reuses --up-bg so it
@@ -599,18 +599,18 @@ button:focus-visible,
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(2.75rem, 7vw, 4.25rem);
+  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
   line-height: 1;
   letter-spacing: -0.03em;
   font-weight: 800;
 }
 
 .hero p {
-  max-width: 34rem;
-  margin: 1.5rem 0 0;
+  max-width: 40rem;
+  margin: 1rem 0 0;
   color: var(--muted-2);
-  font-size: 0.95rem;
-  line-height: 1.65;
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 /* ---------- Stat cards ---------- */
@@ -969,7 +969,7 @@ button:focus-visible,
 /* ---------- Featured ---------- */
 
 .section-label {
-  margin: 3rem 0 0.9rem;
+  margin: 2.25rem 0 0.8rem;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -989,7 +989,7 @@ button:focus-visible,
 }
 
 .section-more {
-  margin: 3rem 0 0.9rem;
+  margin: 2.25rem 0 0.8rem;
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--up);
@@ -1008,6 +1008,151 @@ button:focus-visible,
      onto its own row. */
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1.25rem;
+}
+
+/* ---------- Top stories: one lead card + a dense headline rail ---------- */
+
+.top-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+@media (max-width: 860px) {
+  .top-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.headline-rail {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-highlight);
+  overflow: hidden;
+}
+
+.rail-head {
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rail-item {
+  display: block;
+  padding: 0.75rem 1.2rem;
+  border-bottom: 1px solid var(--rule-soft);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.18s var(--ease-premium);
+}
+
+.rail-item:last-child {
+  border-bottom: none;
+}
+
+.rail-item:hover {
+  background: var(--panel-2);
+}
+
+.rail-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rail-title {
+  font-size: 0.87rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.rail-item:hover .rail-title {
+  color: var(--up);
+}
+
+/* ---------- AI Watch strip: compact cards instead of full-size ones ---------- */
+
+.ai-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.85rem;
+}
+
+.ai-strip-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.9rem 1.1rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.2s var(--ease-premium),
+    box-shadow 0.2s var(--ease-premium),
+    border-color 0.2s var(--ease-premium);
+}
+
+.ai-strip-item.up {
+  border-top-color: var(--up);
+}
+.ai-strip-item.down {
+  border-top-color: var(--down);
+}
+.ai-strip-item.flat {
+  border-top-color: var(--muted);
+}
+
+.ai-strip-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rule-strong);
+}
+
+.ai-strip-meta {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ai-strip-title {
+  font-size: 0.87rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.ai-strip-item:hover .ai-strip-title {
+  color: var(--up);
+}
+
+.ai-strip-tickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.6rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
 }
 
 .card {

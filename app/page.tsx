@@ -2,7 +2,6 @@ import Link from "next/link";
 import CardImage from "@/components/CardImage";
 import ChartBanner from "@/components/ChartBanner";
 import IssueLog from "@/components/IssueLog";
-import TickerBoard from "@/components/TickerBoard";
 import {
   formatCode,
   formatStamp,
@@ -31,8 +30,9 @@ function Verdict({
 
 export default function HomePage() {
   const articles = getAllArticles();
-  const featured = articles.slice(0, 2);
-  const featuredAiWatch = getAllAiWatch().slice(0, 3);
+  const lead = articles[0];
+  const moreHeadlines = articles.slice(1, 6);
+  const featuredAiWatch = getAllAiWatch().slice(0, 5);
   const latest = articles[0];
 
   return (
@@ -47,55 +47,59 @@ export default function HomePage() {
         </p>
       </section>
 
-      {featured.length > 0 && (
+      {lead && (
         <>
-          <p className="section-label">FEATURED</p>
-          <section className="featured">
-            {featured.map((article) => (
-              <article
-                className={`card card--${article.direction}`}
-                key={article.slug}
-              >
-                {article.image ? (
-                  <CardImage src={article.image} alt={article.imageAlt} />
-                ) : (
-                  <ChartBanner
-                    points={article.sparkline}
-                    direction={article.direction}
-                  />
-                )}
+          <p className="section-label">TOP STORIES</p>
+          <section className="top-grid">
+            <article className={`card card--${lead.direction}`}>
+              {lead.image ? (
+                <CardImage src={lead.image} alt={lead.imageAlt} />
+              ) : (
+                <ChartBanner
+                  points={lead.sparkline}
+                  direction={lead.direction}
+                />
+              )}
 
-                <div className="card-body">
-                  <div className="card-head">
-                    <span>
-                      <strong>
-                        {(article.tags[0] ?? "WRAP").toUpperCase()}
-                      </strong>{" "}
-                      · {formatStamp(article.date)} ·{" "}
-                      {getReadingTime(article.content)} min
-                    </span>
-                    <Verdict
-                      verdict={article.verdict}
-                      direction={article.direction}
-                    />
-                  </div>
-
-                  <h3>
-                    <Link href={`/articles/${article.slug}`}>
-                      {article.title}
-                    </Link>
-                  </h3>
-                  {article.summary && <p>{article.summary}</p>}
-
-                  <Link
-                    className="card-link"
-                    href={`/articles/${article.slug}`}
-                  >
-                    Read the wrap <span>→</span>
-                  </Link>
+              <div className="card-body">
+                <div className="card-head">
+                  <span>
+                    <strong>{(lead.tags[0] ?? "WRAP").toUpperCase()}</strong>{" "}
+                    · {formatStamp(lead.date)} ·{" "}
+                    {getReadingTime(lead.content)} min
+                  </span>
+                  <Verdict verdict={lead.verdict} direction={lead.direction} />
                 </div>
-              </article>
-            ))}
+
+                <h3>
+                  <Link href={`/articles/${lead.slug}`}>{lead.title}</Link>
+                </h3>
+                {lead.summary && <p>{lead.summary}</p>}
+
+                <Link className="card-link" href={`/articles/${lead.slug}`}>
+                  Read the wrap <span>→</span>
+                </Link>
+              </div>
+            </article>
+
+            {moreHeadlines.length > 0 && (
+              <aside className="headline-rail">
+                <div className="rail-head">More headlines</div>
+                {moreHeadlines.map((article) => (
+                  <Link
+                    key={article.slug}
+                    href={`/articles/${article.slug}`}
+                    className="rail-item"
+                  >
+                    <div className="rail-meta">
+                      <span>{(article.tags[0] ?? "WRAP").toUpperCase()}</span>
+                      <span>· {formatStamp(article.date)}</span>
+                    </div>
+                    <div className="rail-title">{article.title}</div>
+                  </Link>
+                ))}
+              </aside>
+            )}
           </section>
         </>
       )}
@@ -108,50 +112,38 @@ export default function HomePage() {
               See all →
             </Link>
           </div>
-          <section className="featured">
+          <section className="ai-strip">
             {featuredAiWatch.map((entry) => (
-              <article
-                className={`card card--${entry.direction}`}
+              <Link
                 key={entry.slug}
+                href={`/ai-watch/${entry.slug}`}
+                className={`ai-strip-item ${entry.direction}`}
               >
-                {entry.image ? (
-                  <CardImage src={entry.image} alt={entry.imageAlt} />
-                ) : (
-                  <TickerBoard tickers={entry.tickers} />
+                <span className="ai-strip-meta">
+                  {formatStamp(entry.date)} · {getReadingTime(entry.content)}{" "}
+                  min
+                </span>
+                <span className="ai-strip-title">{entry.title}</span>
+                <Verdict verdict={entry.verdict} direction={entry.direction} />
+                {entry.tickers.length > 0 && (
+                  <span className="ai-strip-tickers">
+                    {entry.tickers.slice(0, 3).map((t) => (
+                      <span
+                        key={t.symbol}
+                        className={
+                          parseFloat(t.change) < 0 ? "down" : "up"
+                        }
+                      >
+                        {t.symbol} {t.change}
+                      </span>
+                    ))}
+                  </span>
                 )}
-
-                <div className="card-body">
-                  <div className="card-head">
-                    <span>
-                      <strong>AI WATCH</strong> · {formatStamp(entry.date)} ·{" "}
-                      {getReadingTime(entry.content)} min
-                    </span>
-                    <Verdict
-                      verdict={entry.verdict}
-                      direction={entry.direction}
-                    />
-                  </div>
-
-                  <h3>
-                    <Link href={`/ai-watch/${entry.slug}`}>{entry.title}</Link>
-                  </h3>
-                  {entry.summary && <p>{entry.summary}</p>}
-
-                  <Link className="card-link" href={`/ai-watch/${entry.slug}`}>
-                    Read the entry <span>→</span>
-                  </Link>
-                </div>
-              </article>
+              </Link>
             ))}
           </section>
         </>
       )}
-
-      <div className="note">
-        Check out <Link href="/ai-watch">AI Watch</Link> — our dedicated
-        coverage of the AI trade: Nvidia, AMD, Broadcom, and the capex and
-        financing moving those names.
-      </div>
 
       <section className="stats">
         <div className="stat">
