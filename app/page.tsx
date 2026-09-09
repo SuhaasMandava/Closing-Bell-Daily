@@ -40,11 +40,6 @@ export default function HomePage() {
       <section className="hero">
         <p className="eyebrow">Daily Wrap</p>
         <h1>Closing Bell</h1>
-        <p>
-          One issue per session, written after the US close. What moved, the
-          number behind it, and the one thing worth watching tomorrow — no
-          hot takes, no price targets.
-        </p>
       </section>
 
       {lead && (
