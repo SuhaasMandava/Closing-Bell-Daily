@@ -1410,6 +1410,7 @@ button:focus-visible,
 .article {
   padding: 3rem 0 0;
   max-width: 44rem;
+  margin: 0 auto;
 }
 
 .article h1 {
