@@ -33,7 +33,7 @@
   --flat-bg: rgba(77, 82, 92, 0.07);
   --flat-border: rgba(77, 82, 92, 0.16);
 
-  --max: 70rem;
+  --max: 104rem;
   --radius: 16px;
   --radius-sm: 12px;
   --mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
