@@ -1096,7 +1096,8 @@ button:focus-visible,
 .category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1.5rem 2rem;
+  gap: 1.5rem 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .category-col {
