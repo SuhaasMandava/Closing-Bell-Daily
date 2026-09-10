@@ -42,7 +42,6 @@ export default function HomePage() {
   return (
     <>
       <section className="hero">
-        <p className="eyebrow">Daily Wrap</p>
         <h1>Closing Bell</h1>
       </section>
 
