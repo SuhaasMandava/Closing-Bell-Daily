@@ -41,10 +41,6 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="hero">
-        <h1>Closing Bell</h1>
-      </section>
-
       {lead && (
         <>
           <p className="section-title">Top stories</p>
