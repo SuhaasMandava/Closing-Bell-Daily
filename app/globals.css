@@ -18,13 +18,15 @@
   --rule-strong: #d4d7dd;
   --fg: #14161a;
   --body-fg: #363a41;
-  --muted: #767b85;
+  /* Darkened slightly from initial picks so text set in these colors clears
+     WCAG AA's 4.5:1 contrast ratio against a white background. */
+  --muted: #6a6f79;
   --muted-2: #4d525c;
   --ticker-bg: #f6f7f9;
 
-  --up: #17a34a;
-  --down: #e0332b;
-  --warn: #b5790a;
+  --up: #0e7a36;
+  --down: #c92a22;
+  --warn: #8f6008;
 
   --up-bg: rgba(23, 163, 74, 0.1);
   --up-border: rgba(23, 163, 74, 0.22);
