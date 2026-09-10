@@ -54,10 +54,27 @@ export default function PrivacyPage() {
           isn&rsquo;t sent to us, and isn&rsquo;t used for tracking.
         </p>
 
-        <h2>Cookies and tracking</h2>
+        <h2>Analytics</h2>
         <p>
-          We don&rsquo;t use cookies, analytics scripts, or third-party
-          advertising trackers on this site.
+          We use Vercel Web Analytics to see aggregate traffic patterns —
+          things like which pages get read and roughly how much traffic the
+          site gets. It&rsquo;s cookieless and doesn&rsquo;t use persistent
+          identifiers or fingerprinting to track you individually across
+          visits or other sites. See{" "}
+          <a
+            href="https://vercel.com/docs/analytics/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Vercel&rsquo;s Web Analytics privacy policy
+          </a>{" "}
+          for details.
+        </p>
+
+        <h2>Cookies and advertising</h2>
+        <p>
+          We don&rsquo;t use cookies or any third-party advertising trackers
+          on this site.
         </p>
 
         <h2>Third-party links</h2>

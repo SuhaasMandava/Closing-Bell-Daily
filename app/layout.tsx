@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Ticker from "@/components/Ticker";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -113,6 +114,8 @@ export default function RootLayout({
             <Link href="/">↑ Latest</Link>
           </div>
         </footer>
+
+        <Analytics />
       </body>
     </html>
   );
