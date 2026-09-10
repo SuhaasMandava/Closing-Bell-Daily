@@ -108,6 +108,8 @@ export default function RootLayout({
           <div className="container">
             <span>Closing Bell Daily · Written after every US close</span>
             <Link href="/ai-watch">AI Watch</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
             <Link href="/">↑ Latest</Link>
           </div>
         </footer>
