@@ -1242,10 +1242,14 @@ button:focus-visible,
   height: 116px;
 }
 
-/* Same crop rules as banner, just tall enough that a lone wide lead card
-   doesn't slice a photo down to a sliver. */
+/* Same crop rules as banner, but sized by aspect ratio rather than a fixed
+   pixel height — a fixed height crops much harder on a narrow mobile column
+   than on a wide desktop lead card, since the width:height ratio the browser
+   has to fill swings wildly between them. Aspect ratio keeps the crop (and
+   the "zoom" it produces) consistent at every width. */
 .card-image--lead {
-  height: 320px;
+  aspect-ratio: 2 / 1;
+  height: auto;
 }
 
 .card-image--thumb {
@@ -1272,7 +1276,8 @@ button:focus-visible,
 }
 
 .chart-banner--lead {
-  height: 320px;
+  aspect-ratio: 2 / 1;
+  height: auto;
 }
 
 .chart-banner-line {
