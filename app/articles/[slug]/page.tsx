@@ -113,6 +113,9 @@ export default async function ArticlePage({ params }: Props) {
       {article.image && (
         <CardImage src={article.image} alt={article.imageAlt} variant="hero" />
       )}
+      {article.image && article.imageCredit && (
+        <p className="image-credit">{article.imageCredit}</p>
+      )}
 
       {article.indexes.length > 0 && (
         <section className="stats compact">

@@ -39,6 +39,8 @@ export type ArticleMeta = {
   image: string | null;
   /** Alt text for `image`. Falls back to the title if not set. */
   imageAlt: string;
+  /** Photo credit line shown under the hero image, e.g. "Photo: Name / Wikimedia Commons (CC BY 4.0)". */
+  imageCredit: string;
 };
 
 export type Article = ArticleMeta & {
@@ -100,6 +102,7 @@ function readArticleFile(slug: string): Article {
     indexes: toIndexes(data.indexes),
     image: data.image ? String(data.image) : findImage("articles", slug),
     imageAlt: data.imageAlt ? String(data.imageAlt) : String(data.title),
+    imageCredit: data.imageCredit ? String(data.imageCredit) : "",
     content,
   };
 }

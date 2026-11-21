@@ -1270,6 +1270,13 @@ button:focus-visible,
   box-shadow: var(--shadow-sm);
 }
 
+.image-credit {
+  margin: 0.4rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
 .chart-banner {
   display: block;
   width: 100%;

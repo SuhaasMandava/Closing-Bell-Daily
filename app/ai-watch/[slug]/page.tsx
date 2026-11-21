@@ -104,6 +104,9 @@ export default async function AiWatchEntryPage({ params }: Props) {
       {entry.image && (
         <CardImage src={entry.image} alt={entry.imageAlt} variant="hero" />
       )}
+      {entry.image && entry.imageCredit && (
+        <p className="image-credit">{entry.imageCredit}</p>
+      )}
 
       {entry.tickers.length > 0 && (
         <section className="stats compact">
