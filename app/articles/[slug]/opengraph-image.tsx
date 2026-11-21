@@ -1,6 +1,9 @@
 import { ImageResponse } from "next/og";
 import { getArticle, getArticleSlugs, formatStamp } from "@/lib/articles";
 
+// Rendered once at build time (required for the static export).
+export const dynamic = "force-static";
+
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

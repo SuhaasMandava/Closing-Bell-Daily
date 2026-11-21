@@ -1,0 +1,5 @@
+name = "closing-bell-daily"
+compatibility_date = "2025-09-01"
+# Exposes Pages environment variables/secrets as process.env (lib/quotes.ts).
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./out"

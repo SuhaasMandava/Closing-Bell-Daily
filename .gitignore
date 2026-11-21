@@ -13,3 +13,7 @@ next-env.d.ts
 npm-debug.log*
 yarn-error.log*
 .vercel
+
+# Cloudflare
+.wrangler/
+.dev.vars

@@ -3,11 +3,12 @@
  *
  * Priority:
  *  1. NEXT_PUBLIC_SITE_URL — set this once you point a custom domain at the app
- *  2. VERCEL_PROJECT_PRODUCTION_URL — Vercel's stable production domain
+ *  2. VERCEL_PROJECT_PRODUCTION_URL — only set when still building on Vercel
  *  3. localhost, for `npm run dev`
  *
- * Note we deliberately prefer the production domain over VERCEL_URL, which is
- * unique per deployment and would put preview hostnames into canonical tags.
+ * On Cloudflare Pages, set NEXT_PUBLIC_SITE_URL (it's read at build time) —
+ * the per-deployment CF_PAGES_URL is deliberately not used, since it would put
+ * preview hostnames into canonical tags.
  */
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;

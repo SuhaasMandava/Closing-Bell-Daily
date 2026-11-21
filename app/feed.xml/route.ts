@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 
+// Rendered once at build time (required for the static export).
+export const dynamic = "force-static";
+
 export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Blog Feed - Generated at 2026-09-02 -->

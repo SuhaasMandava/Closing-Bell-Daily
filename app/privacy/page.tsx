@@ -32,17 +32,17 @@ export default function PrivacyPage() {
 
         <h2>Hosting and server logs</h2>
         <p>
-          This site is hosted on Vercel. Like any web host, Vercel's
+          This site is hosted on Cloudflare Pages. Like any web host, Cloudflare&rsquo;s
           infrastructure automatically logs standard technical information
           for every request — such as IP address, browser type, and the page
           requested — for security and reliability purposes. We do not
           access or use these logs to identify individual visitors. See{" "}
           <a
-            href="https://vercel.com/legal/privacy-policy"
+            href="https://www.cloudflare.com/privacypolicy/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Vercel&rsquo;s privacy policy
+            Cloudflare&rsquo;s privacy policy
           </a>{" "}
           for details on how they handle this data.
         </p>
@@ -56,17 +56,17 @@ export default function PrivacyPage() {
 
         <h2>Analytics</h2>
         <p>
-          We use Vercel Web Analytics to see aggregate traffic patterns —
+          We use Cloudflare Web Analytics to see aggregate traffic patterns —
           things like which pages get read and roughly how much traffic the
           site gets. It&rsquo;s cookieless and doesn&rsquo;t use persistent
           identifiers or fingerprinting to track you individually across
           visits or other sites. See{" "}
           <a
-            href="https://vercel.com/docs/analytics/privacy-policy"
+            href="https://developers.cloudflare.com/web-analytics/data-metrics/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Vercel&rsquo;s Web Analytics privacy policy
+            Cloudflare&rsquo;s Web Analytics documentation
           </a>{" "}
           for details.
         </p>

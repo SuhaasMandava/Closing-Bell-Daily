@@ -39,7 +39,7 @@ component library, no CMS, no database. Each issue is just a Markdown
 | Framework | Next.js 16 (App Router) |
 | Content | MDX files, one per day |
 | Styling | Hand-written CSS, no framework |
-| Hosting | [Vercel](https://vercel.com/) |
+| Hosting | [Cloudflare Pages](https://pages.cloudflare.com/) (static export + one Pages Function) |
 | Live quotes | [Alpaca Markets](https://alpaca.markets/) API |
 
 ## Running it locally
@@ -91,7 +91,7 @@ Opening paragraph.
 ...
 ```
 
-Only `title` and `date` are required. Push to `main` and Vercel rebuilds the
+Only `title` and `date` are required. Push to `main` and Cloudflare Pages rebuilds the
 site automatically — the new issue is live within a minute or two. There's a
 ready-to-copy starter at
 [`content/articles/_TEMPLATE.md.txt`](content/articles/_TEMPLATE.md.txt), and
@@ -102,27 +102,47 @@ AI Watch entries work the same way, in [`content/ai-watch/`](content/ai-watch/).
 
 ---
 
-## Deploying to Vercel
+## Deploying to Cloudflare Pages
 
-Import the repo at [vercel.com/new](https://vercel.com/new) — everything is
-auto-detected, no config needed.
+The site is a static export (`output: "export"` in `next.config.mjs`): every
+page, share image and the feed is rendered at build time into `out/`. The only
+code that runs per request is the live-quotes endpoint, a Pages Function in
+[`functions/api/quotes.ts`](functions/api/quotes.ts) (`/api/quotes`).
 
-To turn on live quotes, set these under **Project Settings → Environment
-Variables**:
+**Git integration (recommended):** Cloudflare dashboard → **Workers & Pages →
+Create → Pages → Connect to Git**, pick this repo, then set:
+
+| Setting | Value |
+| --- | --- |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Build output directory | `out` |
+| Environment variable | `NODE_VERSION` = `22` |
+
+**Or from the CLI** (after `npx wrangler login`): `npm run deploy:cf`.
+`npm run preview:cf` builds and serves the site plus the Function locally.
+
+Set these under **Settings → Variables and Secrets** (Production and
+Preview). `compatibility_flags = ["nodejs_compat"]` in `wrangler.toml` exposes
+them to the Function as `process.env`:
 
 | Variable | Needed? | Notes |
 | --- | --- | --- |
-| `ALPACA_API_KEY_ID` | for live quotes | Mark **Sensitive**, Production + Preview. |
-| `ALPACA_API_SECRET_KEY` | for live quotes | Mark **Sensitive**, Production + Preview. |
+| `ALPACA_API_KEY_ID` | for live quotes | Add as a **Secret**. |
+| `ALPACA_API_SECRET_KEY` | for live quotes | Add as a **Secret**. |
 | `ALPACA_FEED` | optional | `delayed_sip` for full-market delayed data. |
 | `FINNHUB_API_KEY` | optional fallback | Used only when no Alpaca credentials are set. |
-| `NEXT_PUBLIC_SITE_URL` | only with a custom domain | e.g. `https://closingbelldaily.com`, no trailing slash. |
+| `NEXT_PUBLIC_SITE_URL` | yes, for canonical/OG URLs | e.g. `https://closingbelldaily.com`, no trailing slash. Read at **build** time, so redeploy after changing it. |
 
-Keys live in Vercel only — there's no need for a local `.env.local`.
-**Never prefix an API key with `NEXT_PUBLIC_`** — that inlines it into the
-client bundle where anyone can read it.
+**Never prefix an API key with `NEXT_PUBLIC_`**: that inlines it into the
+client bundle where anyone can read it. Without provider keys the ticker shows
+labelled sample data.
 
-Redeploy after changing any environment variable.
+Analytics: enable **Web Analytics** for the Pages project (Settings → Web
+analytics). No code changes are needed.
+
+Note: `npm run dev` doesn't run the Pages Function, so the local ticker shows
+sample data. Use `npm run preview:cf` to test the live-quotes endpoint.
 
 ### Getting live-quote API keys
 
