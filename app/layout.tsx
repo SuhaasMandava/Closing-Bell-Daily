@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
   },
   alternates: {
-    types: { "application/rss+xml": `${SITE_URL}/feed.xml` },
+    types: { "application/atom+xml": `${SITE_URL}/feed.xml` },
   },
 };
 
